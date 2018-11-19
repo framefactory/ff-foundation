@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  server:
+    image: foundation/server
+    container_name: foundation-server
+    build:
+      context: ./services/server/setup
+      dockerfile: Dockerfile
+    env_file:
+      - services/config.env
+    ports: #host:container
+      - "9010:8000"
+    volumes:
+      - .:/app

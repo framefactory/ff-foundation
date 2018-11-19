@@ -2,10 +2,14 @@
 .idea/
 .vscode/
 node_modules/
-dist/
-bin/
+
+test/
 doc/
+services/server/bin
+services/server/static/app
+services/server/static/libs
 
 # FILES
 *.log
 .DS_Store
+secrets.env

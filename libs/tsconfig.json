@@ -1,0 +1,15 @@
+{
+    "references": [
+        { "path": "ff-core.tsconfig.json" },
+        { "path": "ff-react.tsconfig.json" },
+        { "path": "ff-ui.tsconfig.json" },
+        { "path": "ff-browser.tsconfig.json" },
+        { "path": "ff-three.tsconfig.json" }
+    ],
+    "compilerOptions": {
+        "composite": true
+    },
+    "exclude": [
+        "*"
+    ]
+}
