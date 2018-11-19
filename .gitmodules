@@ -1,0 +1,15 @@
+[submodule "libs/ff-core"]
+	path = libs/ff-core
+	url = git@github.com:framelab/ff-core.git
+[submodule "libs/ff-ui"]
+	path = libs/ff-ui
+	url = git@github.com:framelab/ff-ui.git
+[submodule "libs/ff-react"]
+	path = libs/ff-react
+	url = git@github.com:framelab/ff-react.git
+[submodule "libs/ff-three"]
+	path = libs/ff-three
+	url = git@github.com:framelab/ff-three.git
+[submodule "libs/ff-browser"]
+	path = libs/ff-browser
+	url = git@github.com:framelab/ff-browser.git
