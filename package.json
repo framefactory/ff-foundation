@@ -1,0 +1,37 @@
+{
+    "name": "ff-foundation",
+    "version": "1.0.0",
+    "description": "FF Typescript Foundation Library",
+    "scripts": {
+        "build": "npm run build-core; npm run build-react; npm run build-browser",
+        "build-core": "tsc -p ff-core/source --outDir node_modules/@ff/core",
+        "build-react": "tsc -p ff-react/source --outDir node_modules/@ff/react",
+        "build-browser": "tsc -p ff-browser/source --outDir node_modules/@ff/browser",
+        "doc": "npm run build; npm run doc-only",
+        "doc-only": "typedoc --name \"FF Typescript Foundation Library\" --theme minimal --includeDeclarations --ignoreCompilerErrors --excludePrivate --excludeExternals --mode file --target ES6 --jsx react --out doc/ node_modules/@ff"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/framelab/ff-foundation.git"
+    },
+    "keywords": [
+        "typescript",
+        "react"
+    ],
+    "author": {
+        "name": "Ralph Wiedemeier",
+        "url": "https://about.me/ralphw"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/framelab/ff-foundation/issues"
+    },
+    "homepage": "https://github.com/framelab/ff-foundation#readme",
+    "devDependencies": {
+        "@types/react": "^16.4.15",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "typedoc": "^0.12.0",
+        "typescript": "^3.1.1"
+    }
+}
