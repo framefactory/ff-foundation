@@ -23,7 +23,9 @@ const libDir = path.resolve(projectDir, "libs");
 module.exports = {
 
     entry: {
-        "components": path.resolve(sourceDir, "client/components/Application.ts")
+        "components": path.resolve(sourceDir, "client/Components.ts"),
+        "panels": path.resolve(sourceDir, "client/Panels.ts"),
+        "decorators": path.resolve(sourceDir, "client/Decorators.ts"),
     },
 
     output: {

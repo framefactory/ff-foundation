@@ -1,0 +1,17 @@
+/**
+ * FF Typescript Foundation Library
+ * Copyright 2018 Ralph Wiedemeier, Frame Factory GmbH
+ *
+ * License: MIT
+ */
+
+@import "../../libs/ff-ui/source/styles";
+
+html {
+  @include font-ui-normal;
+  font-size: 0.95rem;
+}
+
+ff-dock-view {
+  @include full-size;
+}
