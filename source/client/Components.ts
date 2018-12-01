@@ -5,55 +5,62 @@
  * License: MIT
  */
 
-import { LitElement, html } from "@polymer/lit-element";
+import CustomElement, { customElement, html } from "@ff/ui/CustomElement";
 
-import "@ff/ui/DockView";
+import "@ff/ui/Dialog";
+import "@ff/ui/TitleBar";
+import "@ff/ui/Layout";
+import "@ff/ui/Checkbox";
+import "@ff/ui/Button";
+import "@ff/ui/ButtonGroup";
+import "@ff/ui/LineEdit";
+
 import "./styles.scss";
+import { IButtonClickEvent } from "@ff/ui/Button";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export class Components extends LitElement
+@customElement("ff-components")
+export class Components extends CustomElement
 {
-    static readonly tagName: string = "ff-components";
-
-    constructor()
+    protected onInitialConnect()
     {
-        super();
+        this.setStyle({
+            display: "block",
+            position: "absolute",
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        });
     }
 
     render()
     {
         return html`
-            <ff-dock-view>
-                <ff-dock-strip direction="horizontal">
-                    <ff-dock-stack>
-                        <ff-dock-panel text="Panel One">
-                            <div>One</div>                    
-                        </ff-dock-panel>
-                    </ff-dock-stack>
-                    <div>Two</div>                    
-                    <ff-dock-strip direction="vertical">
-                        <ff-dock-panel text="Panel Three">
-                            <div>Three</div>                    
-                        </ff-dock-panel>
-                        <ff-dock-stack>
-                            <ff-dock-panel text="Yagoy Panel Four">
-                                <div>Four</div>                    
-                            </ff-dock-panel>
-                            <ff-dock-panel text="Yagoy Panel Five">
-                                <div>Five</div>                    
-                            </ff-dock-panel>
-                        </ff-dock-stack>
-                    </ff-dock-strip>
-                </ff-dock-strip>
-            </ff-dock-view>
+            <div class="ff-control">
+                <ff-button text="Button 1" checked></ff-button>
+                <ff-button text="Button 2" icon="fa fa-times"></ff-button>
+                <ff-button text="Button 3"></ff-button>
+            </div>
+            <ff-dialog center >
+                <ff-title-bar title="Hello Dialog a very long dialog title longer longer longer" draggable closable></ff-title-bar>
+                <div class="ff-frame">
+                    <ff-button-group mode="exclusive" style="display:flex;">
+                        <ff-button text="Dialog Button" icon="fa fa-balance-scale"></ff-button>
+                        <ff-button text="Dialog Button"></ff-button>
+                        <ff-button icon="fa fa-balance-scale"></ff-button>
+                    </ff-button-group>
+                    <ff-line-edit text="Hello" placeholder="Your Name"></ff-line-edit>
+                    <ff-line-edit text="World" placeholder="Your Name"></ff-line-edit>
+                    <ff-button name="mybutton" text="Dialog Button" icon="fa fa-balance-scale" selectable @click=${this.onClick}></ff-button>
+                </div>
+            </ff-dialog>
         `;
     }
 
-    createRenderRoot()
+    onClick(event: IButtonClickEvent)
     {
-        return this;
+        console.log(event.currentTarget.name, event.currentTarget.index);
     }
 }
-
-customElements.define(Components.tagName, Components);

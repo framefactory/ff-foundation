@@ -5,18 +5,17 @@
  * License: MIT
  */
 
-import { LitElement, html } from "@polymer/lit-element";
-
+import CustomElement, { customElement, html } from "@ff/ui/CustomElement";
 import DockView, { DockContentRegistry } from "@ff/ui/DockView";
+
 import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export class Panels extends LitElement
+@customElement("ff-panels")
+export class Panels extends CustomElement
 {
-    static readonly tagName: string = "ff-panels";
-
-    protected useLayout = true;
+    protected useLayout = false;
 
     firstUpdated()
     {
@@ -28,7 +27,7 @@ export class Panels extends LitElement
         registry.set("test", () => document.createElement("div"));
 
         const dockView = new DockView();
-        dockView.addEventListener("change", e => {
+        dockView.addEventListener(DockView.changeEvent, e => {
             console.log(dockView.getLayout());
         });
         this.appendChild(dockView);
@@ -38,6 +37,17 @@ export class Panels extends LitElement
             type: "strip",
             direction: "horizontal",
             elements: [{
+                size: 0.5,
+                type: "stack",
+                activePanelIndex: 0,
+                panels: [{
+                    contentId: "test",
+                    text: "Panel One"
+                }, {
+                    contentId: "test",
+                    text: "Panel Two"
+                }]
+            },{
                 size: 0.5,
                 type: "stack",
                 activePanelIndex: 0,
@@ -96,10 +106,10 @@ export class Panels extends LitElement
                             <div>Three</div>                    
                         </ff-dock-panel>
                         <ff-dock-stack>
-                            <ff-dock-panel text="Yagoy Panel Four">
+                            <ff-dock-panel text="Panel Four">
                                 <div>Four</div>                    
                             </ff-dock-panel>
-                            <ff-dock-panel text="Yagoy Panel Five">
+                            <ff-dock-panel text="Panel Five">
                                 <div>Five</div>                    
                             </ff-dock-panel>
                         </ff-dock-stack>
@@ -108,11 +118,4 @@ export class Panels extends LitElement
             </ff-dock-view>
         `;
     }
-
-    createRenderRoot()
-    {
-        return this;
-    }
 }
-
-customElements.define(Panels.tagName, Panels);

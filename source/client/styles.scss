@@ -9,9 +9,19 @@
 
 html {
   @include font-ui-normal;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  background: $color-background;
+  color: $color-text;
 }
 
-ff-dock-view {
+ff-components {
+}
+
+ff-panels {
   @include full-size;
+  display: flex;
+
+  ff-dock-view, ff-tab-container {
+    flex: 1 1 auto;
+  }
 }
