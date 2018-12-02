@@ -11,8 +11,8 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-controls")
-export class Controls extends CustomElement
+@customElement("ff-application")
+export class Application extends CustomElement
 {
     render()
     {

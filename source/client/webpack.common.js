@@ -26,6 +26,7 @@ module.exports = {
         "components": path.resolve(sourceDir, "client/Components.ts"),
         "controls": path.resolve(sourceDir, "client/Controls.ts"),
         "panels": path.resolve(sourceDir, "client/Panels.ts"),
+        "trees": path.resolve(sourceDir, "client/Trees.ts"),
     },
 
     output: {

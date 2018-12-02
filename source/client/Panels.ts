@@ -12,8 +12,8 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-panels")
-export class Panels extends CustomElement
+@customElement("ff-application")
+export class Application extends CustomElement
 {
     protected useLayout = false;
 

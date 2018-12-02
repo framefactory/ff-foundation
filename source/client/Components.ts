@@ -20,19 +20,12 @@ import { IButtonClickEvent } from "@ff/ui/Button";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-components")
-export class Components extends CustomElement
+@customElement("ff-application")
+export class Application extends CustomElement
 {
-    protected onInitialConnect()
+    protected firstUpdated()
     {
-        this.setStyle({
-            display: "block",
-            position: "absolute",
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0"
-        });
+        this.style.display = "block";
     }
 
     render()
@@ -43,10 +36,10 @@ export class Components extends CustomElement
                 <ff-button text="Button 2" icon="fa fa-times"></ff-button>
                 <ff-button text="Button 3"></ff-button>
             </div>
-            <ff-dialog center >
-                <ff-title-bar title="Hello Dialog a very long dialog title longer longer longer" draggable closable></ff-title-bar>
+            <ff-dialog center style="width:180px;">
+                <ff-title-bar title="Hello Dialog a very long dialog" draggable closable></ff-title-bar>
                 <div class="ff-frame">
-                    <ff-button-group mode="exclusive" style="display:flex;">
+                    <ff-button-group mode="exclusive" style="display:flex;flex-wrap:wrap;">
                         <ff-button text="Dialog Button" icon="fa fa-balance-scale"></ff-button>
                         <ff-button text="Dialog Button"></ff-button>
                         <ff-button icon="fa fa-balance-scale"></ff-button>

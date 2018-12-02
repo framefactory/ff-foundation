@@ -5,19 +5,15 @@
  * License: MIT
  */
 
-@import "../../libs/ff-ui/source/styles";
+@import "../../libs/ff-ui/source/themes/dark";
 
-html {
+body {
   @include font-ui-normal;
   font-size: 0.9rem;
-  background: $color-background;
   color: $color-text;
 }
 
-ff-components {
-}
-
-ff-panels {
+ff-application {
   @include full-size;
   display: flex;
 
