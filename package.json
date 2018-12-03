@@ -9,11 +9,12 @@
         "build": "concurrently \"npm run build-server\" \"npm run build-client\"",
         "build-client": "cd source/client && webpack --config webpack.prod.js && cd ../..",
         "build-server": "tsc -b source/server",
-        "build-libs": "npm run build-core; npm run build-ui; npm run build-react; npm run build-browser",
+        "build-libs": "npm run build-core; npm run build-ui; npm run build-react; npm run build-browser; npm run build-drift",
         "build-core": "tsc -p libs/ff-core/source --outDir node_modules/@ff/core",
         "build-ui": "tsc -p libs/ff-ui/source --outDir node_modules/@ff/ui",
         "build-react": "tsc -p libs/ff-react/source --outDir node_modules/@ff/react",
         "build-browser": "tsc -p libs/ff-browser/source --outDir node_modules/@ff/browser",
+        "build-drift": "tsc -p libs/ff-drift/source --outDir node_modules/@ff/drift",
         "doc": "npm run build-libs; npm run doc-only",
         "doc-only": "typedoc --name \"FF Typescript Foundation Library\" --theme minimal --includeDeclarations --ignoreCompilerErrors --excludePrivate --excludeExternals --mode file --target ES6 --jsx react --out doc/ node_modules/@ff"
     },
