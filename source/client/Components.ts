@@ -5,7 +5,7 @@
  * License: MIT
  */
 
-import CustomElement, { customElement, html } from "@ff/ui/CustomElement";
+import CustomElement, { customElement, html, property } from "@ff/ui/CustomElement";
 
 import "@ff/ui/Dialog";
 import "@ff/ui/TitleBar";
@@ -25,11 +25,13 @@ export class Application extends CustomElement
 {
     protected firstUpdated()
     {
-        this.style.display = "block";
+        //this.style.display = "block";
     }
 
-    render()
+    protected render()
     {
+        console.log("Application.render");
+
         return html`
             <div class="ff-control">
                 <ff-button text="Button 1" checked></ff-button>
@@ -54,6 +56,6 @@ export class Application extends CustomElement
 
     onClick(event: IButtonClickEvent)
     {
-        console.log(event.currentTarget.name, event.currentTarget.index);
+        console.log(event.target.name, event.target.index);
     }
 }

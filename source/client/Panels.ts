@@ -17,7 +17,7 @@ export class Application extends CustomElement
 {
     protected useLayout = false;
 
-    firstUpdated()
+    firstConnected()
     {
         if (!this.useLayout) {
             return;
