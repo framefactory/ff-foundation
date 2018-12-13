@@ -48,7 +48,7 @@ export class Application extends CustomElement
 
         const scene = helper.createScene(this.system.module, "Scene");
         const camera = helper.createCamera(scene, "Camera");
-        camera.setValue("Transform:Position", [ 0, 0, 50 ]);
+        camera.setValue("Camera:Transform.Offset", [ 0, 0, 50 ]);
 
         const light = helper.createDirectionalLight(scene, "Light");
         light.setValue("DirectionalLight:Position", [ 0, 0, 1 ]);
@@ -59,8 +59,8 @@ export class Application extends CustomElement
         const aux = this.system.module.createEntity("Aux");
         const osc = aux.createComponent(Oscillator);
         //osc.outs.result.linkTo(boxTransform.ins.rotation, undefined, 0);
-        osc.outs.linkTo("Result", boxTransform.ins, "Rotation[0]");
-        osc.outs.linkTo("Result", boxTransform.ins, "Rotation[2]");
+        //osc.outs.linkTo("Result", boxTransform.ins, "Rotation[0]");
+        //osc.outs.linkTo("Result", boxTransform.ins, "Rotation[2]");
 
         setTimeout(() => console.log(this.system.module.toString(true)), 100);
         //setTimeout(() => console.log(scene.components.get(Scene).scene), 100);
@@ -99,7 +99,7 @@ export class Application extends CustomElement
                     size: 0.5,
                     activePanelIndex: 0,
                     panels: [{
-                        contentId: "hierarchy",
+                        contentId: "renderer",
                         text: "Hierarchy"
                     }]
                 }, {

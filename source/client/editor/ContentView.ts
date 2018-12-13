@@ -5,10 +5,13 @@
  * License: MIT
  */
 
+import * as THREE from "three";
+
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 import ManipTarget from "@ff/browser/ManipTarget";
 import RenderSystem from "@ff/three/ecs/RenderSystem";
-import RenderView from "@ff/three/ecs/RenderView";
+import RenderQuadView from "@ff/three/ecs/RenderQuadView";
+import QuadSplitter, { EQuadViewLayout, IQuadSplitterChangeMessage } from "@ff/ui/ecs/QuadSplitter";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -23,15 +26,13 @@ export interface IResizeEvent extends CustomEvent
 @customElement("ff-content-view")
 export default class ContentView extends CustomElement
 {
-    static readonly resizeEvent: string = "sv-resize";
-
     protected system: RenderSystem;
     protected manipTarget: ManipTarget;
 
-    protected view: RenderView = null;
+    protected view: RenderQuadView = null;
     protected canvas: HTMLCanvasElement = null;
     protected overlay: HTMLDivElement = null;
-
+    protected splitter: QuadSplitter = null;
 
     constructor(system: RenderSystem)
     {
@@ -47,6 +48,7 @@ export default class ContentView extends CustomElement
         this.addEventListener("pointerup", this.manipTarget.onPointerUpOrCancel);
         this.addEventListener("pointercancel", this.manipTarget.onPointerUpOrCancel);
         this.addEventListener("wheel", this.manipTarget.onWheel);
+        this.addEventListener("contextmenu", this.manipTarget.onContextMenu);
     }
 
     protected firstConnected()
@@ -68,14 +70,29 @@ export default class ContentView extends CustomElement
             overflow: "hidden"
         }, this);
 
-        this.view = new RenderView(this.system, this.canvas, this.overlay);
-        this.view.addViewport();
+        this.splitter = this.createElement(QuadSplitter, {
+            position: "absolute",
+            top: "0", bottom: "0", left: "0", right: "0",
+            overflow: "hidden"
+        }, this);
+
+        this.splitter.onChange = (message: IQuadSplitterChangeMessage) => {
+            this.view.horizontalSplit = message.horizontalSplit;
+            this.view.verticalSplit = message.verticalSplit;
+        };
+
+        this.view = new RenderQuadView(this.system, this.canvas, this.overlay);
+        this.view.layout = EQuadViewLayout.Quad;
+        this.splitter.layout = EQuadViewLayout.Quad;
+        //this.view.addViewport().setSize(0, 0, 0.5, 1);
+        //this.view.addViewport().setSize(0.5, 0, 0.5, 1);
+
         this.manipTarget.next = this.view;
     }
 
     protected connected()
     {
-        this.view.enabled = true;
+        this.view.attach();
 
         window.addEventListener("resize", this.onResize);
         window.dispatchEvent(new CustomEvent("resize"));
@@ -83,22 +100,13 @@ export default class ContentView extends CustomElement
 
     protected disconnected()
     {
-        this.view.enabled = false;
+        this.view.detach();
 
         window.removeEventListener("resize", this.onResize);
     }
 
     protected onResize()
     {
-        const width = this.canvas.clientWidth;
-        const height = this.canvas.clientHeight;
-
-        if (this.view) {
-            this.view.resize(width, height);
-        }
-
-        this.dispatchEvent(new CustomEvent(ContentView.resizeEvent, {
-            detail: { width, height }
-        } as IResizeEvent));
+        this.view.resize();
     }
 }
