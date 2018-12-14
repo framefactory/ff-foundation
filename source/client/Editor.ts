@@ -5,6 +5,8 @@
  * License: MIT
  */
 
+import SelectionController from "@ff/core/ecs/SelectionController";
+import Commander from "@ff/core/Commander";
 import RenderSystem from "@ff/three/ecs/RenderSystem";
 
 import {
@@ -23,8 +25,8 @@ import * as helper from "@ff/three/ecs/helper";
 
 import DockView, { DockContentRegistry } from "@ff/ui/DockView";
 import ContentView from "./editor/ContentView";
-import HierarchyView from "./editor/HierarchyView";
-import PropertyView from "./editor/PropertyView";
+import HierarchyTreeView from "./editor/HierarchyTreeView";
+import PropertyTreeView from "./editor/PropertyTreeView";
 
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 
@@ -36,6 +38,8 @@ import "./styles.scss";
 export class Application extends CustomElement
 {
     protected system: RenderSystem;
+    protected commander: Commander;
+    protected selectionController: SelectionController;
 
     constructor()
     {
@@ -43,6 +47,9 @@ export class Application extends CustomElement
 
         this.system = new RenderSystem();
         registerComponents(this.system.registry);
+
+        this.commander = new Commander();
+        this.selectionController = new SelectionController(this.system, this.commander);
 
         this.system.start();
 
@@ -59,8 +66,8 @@ export class Application extends CustomElement
         const aux = this.system.module.createEntity("Aux");
         const osc = aux.createComponent(Oscillator);
         //osc.outs.result.linkTo(boxTransform.ins.rotation, undefined, 0);
-        //osc.outs.linkTo("Result", boxTransform.ins, "Rotation[0]");
-        //osc.outs.linkTo("Result", boxTransform.ins, "Rotation[2]");
+        osc.outs.linkTo("Result", boxTransform.ins, "Rotation[0]");
+        osc.outs.linkTo("Result", boxTransform.ins, "Rotation[2]");
 
         setTimeout(() => console.log(this.system.module.toString(true)), 100);
         //setTimeout(() => console.log(scene.components.get(Scene).scene), 100);
@@ -70,8 +77,8 @@ export class Application extends CustomElement
     {
         const registry: DockContentRegistry = new Map();
         registry.set("renderer", () => new ContentView(this.system));
-        registry.set("hierarchy", () => new HierarchyView(this.system));
-        registry.set("inspector", () => new PropertyView(this.system));
+        registry.set("hierarchy", () => new HierarchyTreeView(this.selectionController));
+        registry.set("properties", () => new PropertyTreeView(this.selectionController));
 
         const dockView = this.appendElement(DockView, {
             position: "absolute",
@@ -99,7 +106,7 @@ export class Application extends CustomElement
                     size: 0.5,
                     activePanelIndex: 0,
                     panels: [{
-                        contentId: "renderer",
+                        contentId: "hierarchy",
                         text: "Hierarchy"
                     }]
                 }, {
@@ -107,7 +114,7 @@ export class Application extends CustomElement
                     size: 0.5,
                     activePanelIndex: 0,
                     panels: [{
-                        contentId: "inspector",
+                        contentId: "properties",
                         text: "Inspector"
                     }]
                 }]
