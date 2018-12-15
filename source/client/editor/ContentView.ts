@@ -84,6 +84,8 @@ export default class ContentView extends CustomElement
         this.view = new RenderQuadView(this.system, this.canvas, this.overlay);
         this.view.layout = EQuadViewLayout.Quad;
         this.splitter.layout = EQuadViewLayout.Quad;
+
+        this.view.viewports[0].enableCameraManip(true);
         //this.view.addViewport().setSize(0, 0, 0.5, 1);
         //this.view.addViewport().setSize(0.5, 0, 0.5, 1);
 
