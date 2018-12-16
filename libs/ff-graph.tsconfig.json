@@ -7,10 +7,10 @@
         "sourceMap": true,
         "jsx": "react",
 
-        "outDir": "../node_modules/@ff/drift",
-        "rootDir": "ff-drift/source"
+        "outDir": "../node_modules/@ff/graph",
+        "rootDir": "ff-graph/source"
     },
     "include": [
-        "ff-drift/source"
+        "ff-graph/source"
     ]
 }

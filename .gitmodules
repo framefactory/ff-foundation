@@ -13,3 +13,6 @@
 [submodule "libs/ff-browser"]
 	path = libs/ff-browser
 	url = git@github.com:framelab/ff-browser.git
+[submodule "libs/ff-graph"]
+	path = libs/ff-graph
+	url = git@github.com:framelab/ff-graph.git
