@@ -5,13 +5,11 @@
  * License: MIT
  */
 
-import * as THREE from "three";
-
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 import ManipTarget from "@ff/browser/ManipTarget";
-import RenderSystem from "@ff/three/ecs/RenderSystem";
-import RenderQuadView from "@ff/three/ecs/RenderQuadView";
-import QuadSplitter, { EQuadViewLayout, IQuadSplitterChangeMessage } from "@ff/ui/ecs/QuadSplitter";
+import RenderSystem from "@ff/three/graph/RenderSystem";
+import RenderQuadView from "@ff/three/graph/RenderQuadView";
+import QuadSplitter, { EQuadViewLayout, IQuadSplitterChangeMessage } from "@ff/ui/QuadSplitter";
 
 ////////////////////////////////////////////////////////////////////////////////
 

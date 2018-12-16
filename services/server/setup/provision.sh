@@ -24,9 +24,9 @@ export NVM_DIR="/root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # install node.js
-nvm install 10.13.0
-nvm use 10.13.0
-nvm alias default 10.13.0
+nvm install 10.14.2
+nvm use 10.14.2
+nvm alias default 10.14.2
 
 # update npm
 npm i -g npm

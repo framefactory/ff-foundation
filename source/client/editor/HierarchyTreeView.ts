@@ -5,9 +5,9 @@
  * License: MIT
  */
 
-import SelectionController from "@ff/core/ecs/SelectionController";
+import SelectionController from "@ff/graph/SelectionController";
 
-import HierarchyTree from "@ff/ui/ecs/HierarchyTree";
+import HierarchyTree from "@ff/ui/graph/HierarchyTree";
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 
 ////////////////////////////////////////////////////////////////////////////////

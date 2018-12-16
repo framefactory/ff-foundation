@@ -5,9 +5,9 @@
  * License: MIT
  */
 
-import SelectionController from "@ff/core/ecs/SelectionController";
+import SelectionController from "@ff/graph/SelectionController";
 
-import PropertyTree from "@ff/ui/ecs/PropertyTree";
+import PropertyTree from "@ff/ui/graph/PropertyTree";
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 
 ////////////////////////////////////////////////////////////////////////////////
