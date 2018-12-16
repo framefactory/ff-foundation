@@ -20,10 +20,14 @@ export default class HierarchyTreeView extends CustomElement
     constructor(controller: SelectionController)
     {
         super();
+
+        this.onClick = this.onClick.bind(this);
+
         this.controller = controller;
+        this.addEventListener("click", this.onClick);
     }
 
-    firstConnected()
+    protected firstConnected()
     {
         this.setStyle({
             position: "absolute",
@@ -34,5 +38,10 @@ export default class HierarchyTreeView extends CustomElement
         this.classList.add("ff-tree-view");
 
         this.appendChild(new HierarchyTree(this.controller));
+    }
+
+    protected onClick()
+    {
+        this.controller.clearSelection();
     }
 }

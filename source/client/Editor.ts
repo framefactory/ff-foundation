@@ -7,8 +7,8 @@
 
 import Commander from "@ff/core/Commander";
 
-import SelectionController from "@ff/graph/SelectionController";
 import RenderSystem from "@ff/three/graph/RenderSystem";
+import SelectionController from "@ff/three/graph/controllers/SelectionController";
 
 import {
     registerComponents,
@@ -17,12 +17,6 @@ import {
 
 import {
     registerComponents as register3DComponents,
-    BasicMaterial,
-    Box,
-    Camera,
-    Mesh,
-    Scene,
-    Torus,
     Transform
 } from "@ff/three/graph/components";
 
