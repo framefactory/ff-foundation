@@ -12,7 +12,7 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-application")
+@customElement("ff-foundation-panels")
 export class Application extends CustomElement
 {
     protected useLayout = false;

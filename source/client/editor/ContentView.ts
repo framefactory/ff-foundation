@@ -7,8 +7,8 @@
 
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 import ManipTarget from "@ff/browser/ManipTarget";
-import RenderSystem from "@ff/three/graph/RenderSystem";
-import RenderQuadView from "@ff/three/graph/RenderQuadView";
+import RenderSystem from "@ff/scene/RenderSystem";
+import RenderQuadView from "@ff/scene/RenderQuadView";
 import QuadSplitter, { EQuadViewLayout, IQuadSplitterChangeMessage } from "@ff/ui/QuadSplitter";
 
 ////////////////////////////////////////////////////////////////////////////////

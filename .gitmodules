@@ -16,3 +16,6 @@
 [submodule "libs/ff-graph"]
 	path = libs/ff-graph
 	url = git@github.com:framelab/ff-graph.git
+[submodule "libs/ff-scene"]
+	path = libs/ff-scene
+	url = git@github.com:framelab/ff-scene.git

@@ -11,7 +11,7 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-application")
+@customElement("ff-foundation-controls")
 export class Application extends CustomElement
 {
     render()

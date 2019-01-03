@@ -10,14 +10,14 @@ import CustomElement, { customElement, html } from "@ff/ui/CustomElement";
 import "@ff/ui/DockView";
 import Tree from "@ff/ui/Tree";
 
-import { schemas } from "@ff/core/ecs/propertyTypes";
-import Property from "@ff/core/ecs/Property";
-import PropertyField from "@ff/ui/PropertyField";
+import { schemas } from "@ff/graph/propertyTypes";
+import Property from "@ff/graph/Property";
+import PropertyField from "@ff/ui/graph/PropertyField";
 import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-application")
+@customElement("ff-foundation-trees")
 export class Application extends CustomElement
 {
     render()

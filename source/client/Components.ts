@@ -20,7 +20,7 @@ import { IButtonClickEvent } from "@ff/ui/Button";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-application")
+@customElement("ff-foundation-components")
 export class Application extends CustomElement
 {
     protected firstUpdated()

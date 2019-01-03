@@ -7,20 +7,15 @@
 
 import Commander from "@ff/core/Commander";
 
-import RenderSystem from "@ff/three/graph/RenderSystem";
-import SelectionController from "@ff/three/graph/controllers/SelectionController";
+import RenderSystem from "@ff/scene/RenderSystem";
+import SelectionController from "@ff/graph/Selection";
 
-import {
-    registerComponents,
-    Oscillator
-} from "@ff/graph/components";
+import Oscillator from "@ff/graph/components/Oscillator";
 
-import {
-    registerComponents as register3DComponents,
-    Transform
-} from "@ff/three/graph/components";
+import { componentTypes as componentTypes3D } from "@ff/scene/components";
+import Transform from "@ff/scene/components/Transform";
 
-import * as helper from "@ff/three/graph/helper";
+import * as helper from "@ff/scene/helper";
 
 import DockView, { DockContentRegistry } from "@ff/ui/DockView";
 import ContentView from "./editor/ContentView";
@@ -33,7 +28,7 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-application")
+@customElement("ff-foundation-editor")
 export class Application extends CustomElement
 {
     protected system: RenderSystem;
@@ -45,8 +40,8 @@ export class Application extends CustomElement
         super();
 
         this.system = new RenderSystem();
-        registerComponents(this.system.registry);
-        register3DComponents(this.system.registry);
+        this.system.registry.registerComponentType(Oscillator);
+        this.system.registry.registerComponentType(componentTypes3D);
 
         this.commander = new Commander();
         this.selectionController = new SelectionController(this.system, this.commander);
@@ -66,8 +61,8 @@ export class Application extends CustomElement
         const aux = this.system.graph.createNode("Aux");
         const osc = aux.createComponent(Oscillator);
         //osc.outs.result.linkTo(boxTransform.ins.rotation, undefined, 0);
-        osc.outs.linkTo("Result", boxTransform.ins, "Rotation[0]");
-        osc.outs.linkTo("Result", boxTransform.ins, "Rotation[2]");
+        osc.outs.linkTo("Result", boxTransform.ins, "Transform.Rotation[0]");
+        osc.outs.linkTo("Result", boxTransform.ins, "Transform.Rotation[2]");
 
         setTimeout(() => console.log(this.system.graph.toString(true)), 100);
         //setTimeout(() => console.log(scene.components.get(Scene).scene), 100);

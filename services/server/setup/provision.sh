@@ -12,7 +12,7 @@ apt-get install -y vim wget curl bzip2 git
 apt-get install -y build-essential libssl-dev python
 
 # Optional: install memcached
-apt-get install -y memcached
+#apt-get install -y memcached
 
 # Install NVM (node version manager)
 cd ~
@@ -24,9 +24,9 @@ export NVM_DIR="/root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # install node.js
-nvm install 10.14.2
-nvm use 10.14.2
-nvm alias default 10.14.2
+nvm install 10.15.0
+nvm use 10.15.0
+nvm alias default 10.15.0
 
 # update npm
 npm i -g npm
