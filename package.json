@@ -19,9 +19,11 @@
         "build-three": "tsc -p libs/ff-three/tsconfig.module.json",
         "build-scene": "tsc -p libs/ff-scene/tsconfig.module.json",
         "doc": "typedoc --name \"Smithsonian Voyager\" --exclude \"**/node_modules/**\" --ignoreCompilerErrors --mode file --target ES6 --theme minimal --out doc/code/ source/",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "npm run test-core",
+        "test-core": "tsc -b libs/ff-core/tsconfig.test.json; mocha -c --ui tdd node_modules/@ff/test/core/test.js || exit 0",
         "up": "docker-compose up -d; docker-compose logs -f",
         "down": "docker-compose stop; docker-compose rm -f -v",
+        "restart": "docker-compose stop; docker-compose rm -f -v; docker-compose up -d; docker-compose logs -f",
         "bash": "docker-compose exec server bash"
     },
     "nodemonConfig": {

@@ -5,7 +5,7 @@
  * License: MIT
  */
 
-import Selection from "@ff/graph/Selection";
+import SelectionController from "@ff/graph/SelectionController";
 
 import HierarchyTree from "@ff/ui/graph/HierarchyTree";
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
@@ -15,9 +15,9 @@ import CustomElement, { customElement } from "@ff/ui/CustomElement";
 @customElement("ff-hierarchy-tree-view")
 export default class HierarchyTreeView extends CustomElement
 {
-    protected controller: Selection;
+    protected controller: SelectionController;
 
-    constructor(controller: Selection)
+    constructor(controller: SelectionController)
     {
         super();
 

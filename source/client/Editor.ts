@@ -8,12 +8,13 @@
 import Commander from "@ff/core/Commander";
 
 import RenderSystem from "@ff/scene/RenderSystem";
-import SelectionController from "@ff/graph/Selection";
+import SelectionController from "@ff/scene/SelectionController";
 
 import Oscillator from "@ff/graph/components/Oscillator";
 
 import { componentTypes as componentTypes3D } from "@ff/scene/components";
 import Transform from "@ff/scene/components/Transform";
+import Camera from "@ff/scene/components/Camera";
 
 import * as helper from "@ff/scene/helper";
 
@@ -25,6 +26,7 @@ import PropertyTreeView from "./editor/PropertyTreeView";
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 
 import "./styles.scss";
+import DirectionalLight from "@ff/scene/components/DirectionalLight";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -50,19 +52,21 @@ export class Application extends CustomElement
 
         const scene = helper.createScene(this.system.graph, "Scene");
         const camera = helper.createCamera(scene, "Camera");
-        camera.setValue("Camera:Transform.Offset", [ 0, 0, 50 ]);
+        camera.components.get(Camera).ins.offset.setValue([ 0, 0, 50 ]);
 
         const light = helper.createDirectionalLight(scene, "Light");
-        light.setValue("DirectionalLight:Position", [ 0, 0, 1 ]);
+        light.components.get(DirectionalLight).ins.position.setValue([ 0, 0, 1 ]);
 
         const box = helper.createBox(scene, "Box");
         const boxTransform = box.components.get(Transform);
 
         const aux = this.system.graph.createNode("Aux");
-        const osc = aux.createComponent(Oscillator);
-        //osc.outs.result.linkTo(boxTransform.ins.rotation, undefined, 0);
-        osc.outs.linkTo("Result", boxTransform.ins, "Transform.Rotation[0]");
-        osc.outs.linkTo("Result", boxTransform.ins, "Transform.Rotation[2]");
+        const osc = aux.createComponent(Oscillator, "Rotator");
+
+        osc.ins.max.setValue(180);
+        osc.ins.duration.setValue(2);
+        osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 0);
+        osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 2);
 
         setTimeout(() => console.log(this.system.graph.toString(true)), 100);
         //setTimeout(() => console.log(scene.components.get(Scene).scene), 100);
