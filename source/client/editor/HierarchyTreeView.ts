@@ -5,30 +5,28 @@
  * License: MIT
  */
 
-import SelectionController from "@ff/graph/SelectionController";
+import System from "@ff/graph/System";
 
 import HierarchyTree from "@ff/ui/graph/HierarchyTree";
-import CustomElement, { customElement } from "@ff/ui/CustomElement";
+import SelectionView, { customElement } from "@ff/ui/graph/SelectionView";
 
 ////////////////////////////////////////////////////////////////////////////////
 
 @customElement("ff-hierarchy-tree-view")
-export default class HierarchyTreeView extends CustomElement
+export default class HierarchyTreeView extends SelectionView
 {
-    protected controller: SelectionController;
-
-    constructor(controller: SelectionController)
+    constructor(system?: System)
     {
-        super();
+        super(system);
 
         this.onClick = this.onClick.bind(this);
-
-        this.controller = controller;
         this.addEventListener("click", this.onClick);
     }
 
     protected firstConnected()
     {
+        super.firstConnected();
+
         this.setStyle({
             position: "absolute",
             top: "0", left: "0", bottom: "0", right: "0",
@@ -37,11 +35,11 @@ export default class HierarchyTreeView extends CustomElement
 
         this.classList.add("ff-tree-view");
 
-        this.appendChild(new HierarchyTree(this.controller));
+        this.appendChild(new HierarchyTree(this.system));
     }
 
     protected onClick()
     {
-        this.controller.clearSelection();
+        this.selection.clearSelection();
     }
 }

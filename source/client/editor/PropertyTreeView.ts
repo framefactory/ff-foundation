@@ -5,26 +5,18 @@
  * License: MIT
  */
 
-import SelectionController from "@ff/graph/SelectionController";
-
 import PropertyTree from "@ff/ui/graph/PropertyTree";
-import CustomElement, { customElement } from "@ff/ui/CustomElement";
+import SelectionView, { customElement } from "@ff/ui/graph/SelectionView";
 
 ////////////////////////////////////////////////////////////////////////////////
 
 @customElement("ff-property-tree-view")
-export default class PropertyTreeView extends CustomElement
+export default class PropertyTreeView extends SelectionView
 {
-    protected controller: SelectionController;
-
-    constructor(controller: SelectionController)
-    {
-        super();
-        this.controller = controller;
-    }
-
     firstConnected()
     {
+        super.firstConnected();
+
         this.setStyle({
             position: "absolute",
             top: "0", left: "0", bottom: "0", right: "0",
@@ -33,6 +25,6 @@ export default class PropertyTreeView extends CustomElement
 
         this.classList.add("ff-tree-view");
 
-        this.appendChild(new PropertyTree(this.controller));
+        this.appendChild(new PropertyTree(this.system));
     }
 }
