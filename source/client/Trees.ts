@@ -22,7 +22,7 @@ export class Application extends CustomElement
 {
     render()
     {
-        const property = new Property("Position", { preset: [0.3, 0.3], min: 0, max: 100, bar: true });
+        const property = new Property(null, null, "Position", { preset: [0.3, 0.3], min: 0, max: 100, bar: true });
 
         const propField0 = new PropertyField();
         propField0.property = property;
