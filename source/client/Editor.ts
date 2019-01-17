@@ -6,12 +6,14 @@
  */
 
 import Commander from "@ff/core/Commander";
-
-import RenderSystem from "@ff/scene/RenderSystem";
-
+import System from "@ff/graph/System";
+import CPulse from "@ff/graph/components/CPulse";
 import COscillator from "@ff/graph/components/COscillator";
 
+import { componentTypes } from "@ff/graph/components";
 import { componentTypes as componentTypes3D } from "@ff/scene/components";
+
+import CRenderer from "@ff/scene/components/CRenderer";
 import CPickSelection from "@ff/scene/components/CPickSelection";
 import CScene from "@ff/scene/components/CScene";
 import CTransform from "@ff/scene/components/CTransform";
@@ -34,22 +36,23 @@ import "./styles.scss";
 @customElement("ff-foundation-editor")
 export class Application extends CustomElement
 {
-    protected system: RenderSystem;
+    protected system: System;
     protected commander: Commander;
 
     constructor()
     {
         super();
 
-        this.system = new RenderSystem();
-        this.system.registry.registerComponentType(COscillator);
+        this.system = new System();
+        this.system.registry.registerComponentType(componentTypes);
         this.system.registry.registerComponentType(componentTypes3D);
 
         this.commander = new Commander();
         const main = this.system.graph.createNode("Main");
-        main.createComponent(CPickSelection).createActions(this.commander);
 
-        this.system.start();
+        main.createComponent(CPulse);
+        main.createComponent(CRenderer);
+        main.createComponent(CPickSelection).createActions(this.commander);
 
         const scene = helper.createScene(this.system.graph, "Scene");
 
@@ -70,6 +73,7 @@ export class Application extends CustomElement
         osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 0);
         osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 2);
 
+        main.components.get(CPulse).start();
         setTimeout(() => console.log(this.system.graph.toString(true)), 100);
     }
 

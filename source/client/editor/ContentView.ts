@@ -7,7 +7,7 @@
 
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 import ManipTarget from "@ff/browser/ManipTarget";
-import RenderSystem from "@ff/scene/RenderSystem";
+import System from "@ff/graph/System";
 import RenderQuadView from "@ff/scene/RenderQuadView";
 import QuadSplitter, { EQuadViewLayout, IQuadSplitterChangeMessage } from "@ff/ui/QuadSplitter";
 
@@ -24,7 +24,7 @@ export interface IResizeEvent extends CustomEvent
 @customElement("ff-content-view")
 export default class ContentView extends CustomElement
 {
-    protected system: RenderSystem;
+    protected system: System;
     protected manipTarget: ManipTarget;
 
     protected view: RenderQuadView = null;
@@ -32,7 +32,7 @@ export default class ContentView extends CustomElement
     protected overlay: HTMLDivElement = null;
     protected splitter: QuadSplitter = null;
 
-    constructor(system: RenderSystem)
+    constructor(system: System)
     {
         super();
 
