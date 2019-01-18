@@ -5,6 +5,8 @@
  * License: MIT
  */
 
+import Color from "@ff/core/Color";
+
 import CustomElement, { customElement, html, property } from "@ff/ui/CustomElement";
 
 import "@ff/ui/Dialog";
@@ -22,6 +24,7 @@ import "./styles.scss";
 
 import { IButtonClickEvent } from "@ff/ui/Button";
 import { IMenuEntry, IMenuSelectEvent } from "@ff/ui/Menu";
+import { IColorEditChangeEvent } from "@ff/ui/ColorEdit";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -53,6 +56,8 @@ export class Application extends CustomElement
             }
         ];
 
+        const color = new Color().setHSV(180, 0.5, 0.5).setAlpha(0);
+
         return html`
             <ff-flex-row class="ff-frame">
                 <ff-button text="Button 1" checked title="Button 1 Title" caret></ff-button>
@@ -64,7 +69,7 @@ export class Application extends CustomElement
             </ff-flex-row>
 
             <ff-flex-row class="ff-frame">
-                <ff-color-edit style="height: 250px; width: 300px;">
+                <ff-color-edit .color=${color} style="height: 200px; width: 230px;" alpha numeric @change=${this.onColorChange}>
                 </ff-color-edit>
             </ff-flex-row>
 
@@ -92,5 +97,10 @@ export class Application extends CustomElement
     protected onMenuSelect(event: IMenuSelectEvent)
     {
         console.log(event.detail.entry);
+    }
+
+    protected onColorChange(event: IColorEditChangeEvent)
+    {
+        //console.log(event.detail);
     }
 }
