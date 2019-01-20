@@ -16,18 +16,15 @@ import { componentTypes as componentTypes3D } from "@ff/scene/components";
 
 import CRenderer from "@ff/scene/components/CRenderer";
 import CPickSelection from "@ff/scene/components/CPickSelection";
-import CScene from "@ff/scene/components/CScene";
 import CTransform from "@ff/scene/components/CTransform";
 import CCamera from "@ff/scene/components/CCamera";
 import CDirectionalLight from "@ff/scene/components/CDirectionalLight";
-import CMesh from "@ff/scene/components/CMesh";
-import CRenderGraph from "@ff/scene/components/CRenderGraph";
 
 import * as helper from "@ff/scene/helper";
 
 import DockView, { DockContentRegistry } from "@ff/ui/DockView";
+import HierarchyTreeView from "@ff/ui/graph/HierarchyTreeView";
 import ContentView from "./editor/ContentView";
-import HierarchyTreeView from "./editor/HierarchyTreeView";
 import PropertyTreeView from "./editor/PropertyTreeView";
 
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
