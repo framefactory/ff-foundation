@@ -23,8 +23,10 @@ import "./styles.scss";
 
 import Icon from "@ff/ui/Icon";
 import { IButtonClickEvent } from "@ff/ui/Button";
-import { IMenuEntry, IMenuSelectEvent } from "@ff/ui/Menu";
+import { IMenuItem, IMenuSelectEvent } from "@ff/ui/Menu";
 import { IColorEditChangeEvent } from "@ff/ui/ColorEdit";
+
+import Notification, { error } from "@ff/ui/Notification";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -41,13 +43,17 @@ export class Application extends CustomElement
 {
     protected firstUpdated()
     {
+        setTimeout(() => new Notification("OK this is a very long notification text, it will probably require multiple lines. OK this is a very long notification text, it will probably require multiple lines.", "info"), 500);
+        setTimeout(() => new Notification("Hello World 2", "warning"), 1000);
+        setTimeout(() => new Notification("Download completed.", "success"), 1250);
+        setTimeout(() => error("Hello World 3"), 1500);
     }
 
     protected render()
     {
         console.log("Application.render");
 
-        const entries: IMenuEntry[] = [
+        const items: IMenuItem[] = [
             {
                 text: "First Option",
                 checked: true
@@ -57,7 +63,7 @@ export class Application extends CustomElement
             },
             {
                 text: "Second Option",
-                icon: "fa fa-shopping-cart"
+                icon: "bath"
             },
             {
                 text: "Third Option"
@@ -69,7 +75,7 @@ export class Application extends CustomElement
         return html`
             <div class="ff-flex-row ff-frame">
                 <ff-button text="Button 1" checked title="Button 1 Title" caret></ff-button>
-                <ff-dropdown text="Dropdown 2" icon="close" .entries=${entries} @select=${this.onMenuSelect}></ff-dropdown>
+                <ff-dropdown text="Dropdown 2" icon="close" .items=${items} itemIndex="0" @select=${this.onMenuSelect}></ff-dropdown>
                 <ff-button text="Long Button 3" icon="save"></ff-button>
                 <ff-button text="Long Button 4" icon="atom"></ff-button>
                 <ff-button text="Long Button 5" icon="bath" caret up></ff-button>
@@ -94,6 +100,8 @@ export class Application extends CustomElement
                     <ff-button name="mybutton" text="Dialog Button" icon="scale" selectable @click=${this.onClick}></ff-button>
                 </div>
             </ff-dialog>
+            
+            <div id="ff-notification-stack"></div>
         `;
     }
 
@@ -104,7 +112,7 @@ export class Application extends CustomElement
 
     protected onMenuSelect(event: IMenuSelectEvent)
     {
-        console.log(event.detail.entry);
+        console.log(event.detail.item);
     }
 
     protected onColorChange(event: IColorEditChangeEvent)
