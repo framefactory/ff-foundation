@@ -8,7 +8,7 @@
 @import "../../libs/ff-ui/source/themes/dark";
 
 ff-application {
-  @include full-size;
+  @include fullsize;
   display: flex;
 
   ff-dock-view, ff-tab-container {

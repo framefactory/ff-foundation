@@ -4,6 +4,7 @@ services:
   server:
     image: foundation/server
     container_name: foundation-server
+    restart: always
     build:
       context: ./services/server/setup
       dockerfile: Dockerfile
