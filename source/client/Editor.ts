@@ -44,8 +44,8 @@ export class Application extends CustomElement
         super();
 
         this.system = new System();
-        this.system.registry.registerComponentType(componentTypes);
-        this.system.registry.registerComponentType(componentTypes3D);
+        this.system.registry.add(componentTypes);
+        this.system.registry.add(componentTypes3D);
 
         const inflate = false;
 
@@ -85,7 +85,7 @@ export class Application extends CustomElement
         }
 
 
-        this.system.nodes.findByName("Main").components.get(CPulse).start();
+        this.system.findNodeByName("Main").components.get(CPulse).start();
         //setTimeout(() => console.log(this.system.graph.toString(true)), 100);
 
         window["dump"] = () => console.log(JSON.stringify(this.system.deflate()));

@@ -6,7 +6,7 @@
         "start": "npm run server",
         "server": "nodemon services/server/bin/index.js",
         "watch": "npm run watch-editor",
-        "watch-editor": "concurrently \"cd source/client && webpack --watch --app=editor\" \"tsc -b libs -w\" \"tsc -b source/server -w\" \"nodemon services/server/bin/index.js\"",
+        "watch-editor": "concurrently \"cd source/client && webpack --watch --app=editor\" \"tsc -b source/server -w\" \"nodemon services/server/bin/index.js\"",
         "watch-components": "concurrently \"cd source/client && webpack --watch --app=components\" \"tsc -b libs -w\" \"tsc -b source/server -w\" \"nodemon services/server/bin/index.js\"",
         "build": "concurrently \"npm run build-server\" \"npm run build-dev\"",
         "build-dev": "cd source/client; webpack --mode=development --app=all; cd ../..",
