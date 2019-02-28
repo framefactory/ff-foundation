@@ -19,6 +19,11 @@ import CPickSelection from "@ff/scene/components/CPickSelection";
 import CTransform from "@ff/scene/components/CTransform";
 import CCamera from "@ff/scene/components/CCamera";
 import CDirectionalLight from "@ff/scene/components/CDirectionalLight";
+import CPointLight from "@ff/scene/components/CPointLight";
+import CSpotLight from "@ff/scene/components/CSpotLight";
+import CBackground from "@ff/scene/components/CBackground";
+import CFloor from "@ff/scene/components/CFloor";
+import CNavigator from "@ff/scene/components/CNavigator";
 
 import * as helper from "@ff/scene/helper";
 
@@ -64,12 +69,15 @@ export class Application extends CustomElement
             const sceneGraph = main.createComponent(CGraph).innerGraph;
 
             const scene = helper.createScene(sceneGraph, "Scene");
+            scene.createComponent(CBackground);
+            scene.createComponent(CFloor);
 
             const camera = helper.createCamera(scene, "Camera");
             camera.components.get(CCamera).ins.position.setValue([ 0, 0, 50 ]);
+            camera.createComponent(CNavigator);
 
-            const light = helper.createDirectionalLight(scene, "Light");
-            light.components.get(CDirectionalLight).ins.position.setValue([ 0, 0, 1 ]);
+            const light = helper.createSpotLight(scene, "Light");
+            light.components.get(CSpotLight).ins.position.setValue([ 0, 10, 1 ]);
 
             const box = helper.createBox(scene, "Box");
             const boxTransform = box.components.get(CTransform);
