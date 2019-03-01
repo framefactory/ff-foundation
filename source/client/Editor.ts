@@ -23,12 +23,14 @@ import CPointLight from "@ff/scene/components/CPointLight";
 import CSpotLight from "@ff/scene/components/CSpotLight";
 import CBackground from "@ff/scene/components/CBackground";
 import CFloor from "@ff/scene/components/CFloor";
+import CGrid from "@ff/scene/components/CGrid";
 import CNavigator from "@ff/scene/components/CNavigator";
 
 import * as helper from "@ff/scene/helper";
 
 import DockView, { DockContentRegistry } from "@ff/ui/DockView";
-import HierarchyTreeView from "@ff/ui/graph/HierarchyTreeView";
+import HierarchyTreeView from "@ff/scene/ui/HierarchyTreeView";
+
 import ContentView from "./editor/ContentView";
 import PropertyTreeView from "./editor/PropertyTreeView";
 
@@ -71,6 +73,8 @@ export class Application extends CustomElement
             const scene = helper.createScene(sceneGraph, "Scene");
             scene.createComponent(CBackground);
             scene.createComponent(CFloor);
+            scene.createComponent(CGrid);
+
 
             const camera = helper.createCamera(scene, "Camera");
             camera.components.get(CCamera).ins.position.setValue([ 0, 0, 50 ]);

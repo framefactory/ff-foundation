@@ -5,7 +5,8 @@
  * License: MIT
  */
 
-@import "../../libs/ff-ui/source/themes/dark";
+@import "../../libs/ff-ui/source/styles/dark";
+@import "../../libs/ff-scene/source/ui/styles";
 
 ff-application {
   @include fullsize;

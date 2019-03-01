@@ -12,7 +12,8 @@ import Tree from "@ff/ui/Tree";
 
 import { schemas } from "@ff/graph/propertyTypes";
 import Property from "@ff/graph/Property";
-import PropertyField from "@ff/ui/graph/PropertyField";
+import PropertyField from "@ff/scene/ui/PropertyField";
+
 import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////

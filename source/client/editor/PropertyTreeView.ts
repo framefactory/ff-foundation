@@ -5,8 +5,8 @@
  * License: MIT
  */
 
-import PropertyTree from "@ff/ui/graph/PropertyTree";
-import SelectionView, { customElement } from "@ff/ui/graph/SelectionView";
+import PropertyTree from "@ff/scene/ui/PropertyTree";
+import SelectionView, { customElement } from "@ff/scene/ui/SelectionView";
 
 ////////////////////////////////////////////////////////////////////////////////
 
