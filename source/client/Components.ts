@@ -18,6 +18,7 @@ import "@ff/ui/Dropdown";
 import "@ff/ui/LineEdit";
 import "@ff/ui/ColorEdit";
 import "@ff/ui/ColorWheel";
+import "@ff/ui/ColorButton";
 
 import "./styles.scss";
 
@@ -85,6 +86,8 @@ export class Application extends CustomElement
             <div class="ff-flex-row ff-frame">
                 <ff-color-edit .color=${color} style="height: 200px; width: 230px;" alpha numeric @change=${this.onColorChange}>
                 </ff-color-edit>
+                
+                <ff-color-button selectable style="height: 30px; width: 30px;"></ff-color-button>
             </div>
 
             <ff-dialog center style="width:180px;">
