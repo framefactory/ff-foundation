@@ -25,6 +25,9 @@ import CBackground from "@ff/scene/components/CBackground";
 import CFloor from "@ff/scene/components/CFloor";
 import CGrid from "@ff/scene/components/CGrid";
 import CNavigator from "@ff/scene/components/CNavigator";
+import CPhongMaterial from "@ff/scene/components/CPhongMaterial";
+import CImageTexture from "@ff/scene/components/CImageTexture";
+import CVideoTexture from "@ff/scene/components/CVideoTexture";
 
 import * as helper from "@ff/scene/helper";
 
@@ -85,6 +88,8 @@ export class Application extends CustomElement
 
             const box = helper.createBox(scene, "Box");
             const boxTransform = box.components.get(CTransform);
+            const tex = box.createComponent(CVideoTexture);
+            box.getComponent(CPhongMaterial).ins.colorMap.linkFrom(tex.outs.self);
 
             const aux = sceneGraph.createNode("Aux");
             const osc = aux.createComponent(COscillator, "Rotator");
