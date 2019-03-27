@@ -7,6 +7,7 @@
 
 import Commander from "@ff/core/Commander";
 import System from "@ff/graph/System";
+import Node from "@ff/graph/Node";
 import CGraph from "@ff/graph/components/CGraph";
 import CPulse from "@ff/graph/components/CPulse";
 import COscillator from "@ff/graph/components/COscillator";
@@ -40,6 +41,8 @@ import PropertyTreeView from "./editor/PropertyTreeView";
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 
 import "./styles.scss";
+import CScene from "@ff/scene/components/CScene";
+import CRenderGraph from "@ff/scene/components/CRenderGraph";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -56,11 +59,12 @@ export class Application extends CustomElement
         this.system = new System();
         this.system.registry.add(componentTypes);
         this.system.registry.add(componentTypes3D);
+        this.system.registry.add(Node);
 
-        const inflate = false;
+        const inflate = true;
 
         if (inflate) {
-            const scene = `{"nodes":[{"id":"UJ4IWJpabcfG","name":"Main","components":[{"type":"CPulse","id":"SXPk5uqCgbsp"},{"type":"CRenderer","id":"Zo0K9vvSg2AV"},{"type":"CPickSelection","id":"50RBEnGvGPd8"}]},{"id":"9ggZqqMZjDWp","name":"Scene","components":[{"type":"CScene","id":"bYRqFzWbVblB","children":["0OlnMh516Lx9","e2ySCKYfcOo6","TYkqAWqXplyG"]}]},{"id":"TEBQ0qjRaMx5","name":"Camera","components":[{"type":"CTransform","id":"0OlnMh516Lx9","children":[]},{"type":"CCamera","id":"rPUNPouSOcUa","ins":{"position":{"value":[0,0,50]}}}]},{"id":"ajxEwrVkTHNZ","name":"Light","components":[{"type":"CTransform","id":"e2ySCKYfcOo6","children":[]},{"type":"CDirectionalLight","id":"s7UZWkIIqUAl","ins":{"position":{"value":[0,0,1]}}}]},{"id":"6JIx1ag93XPw","name":"Box","components":[{"type":"CTransform","id":"TYkqAWqXplyG","ins":{"rotation":{"value":[0.00002542283673365414,0,0.00002542283673365414]}},"children":[]},{"type":"CMesh","id":"3FTunnxVE778"},{"type":"CBox","id":"lwwmglkiJy9C"},{"type":"CPhongMaterial","id":"mZYsiYq1VjN1"}]},{"id":"PS6bFC2ZW0Wp","name":"Aux","components":[{"type":"COscillator","id":"zYRh97yLkTuQ","name":"Rotator","ins":{"run":{"value":true},"max":{"value":90},"curve":{"value":11},"mode":{"value":2},"duration":{"value":2}},"outs":{"value":{"links":[{"id":"TYkqAWqXplyG","key":"rotation","dstIndex":0},{"id":"TYkqAWqXplyG","key":"rotation","dstIndex":2}]}}}]}]}`;
+            const scene = `{"nodes":[{"components":[{"type":"CPulse","id":"naC7kL7XrxJq"},{"type":"CRenderer","id":"uGypeASRFYMx"},{"type":"CPickSelection","id":"a8YKsoolG4rO"}],"type":"Node","id":"KQl8ynagkuUm","name":"Main"},{"components":[{"type":"CScene","id":"1q97JKvxk7xe"},{"graph":{"nodes":[{"components":[{"children":["fnZ2MS6BEtkv","tuHkbuym3Bp1","g78HaXRUwAxh"],"type":"CTransform","id":"8s3S04eGFtg7"},{"type":"CBackground","id":"VmpqV44ovNhS"},{"type":"CFloor","id":"g1sgoqbLTjjA"},{"type":"CGrid","id":"4DYqcxNcAk6O"}],"type":"Node","id":"G5ltjIUDqV4D","name":"Root"},{"components":[{"type":"CTransform","id":"fnZ2MS6BEtkv"},{"ins":{"position":{"value":[0,0,50]}},"type":"CCamera","id":"kq1vEHJvcOBJ"},{"type":"CNavigator","id":"4p3qzFZVM42H"}],"type":"Node","id":"GbSTNJr6UmOo","name":"Camera"},{"components":[{"type":"CTransform","id":"tuHkbuym3Bp1"},{"ins":{"position":{"value":[0,10,1]}},"type":"CSpotLight","id":"Tn9N4Shs416N"}],"type":"Node","id":"wmnM8WnhGvnQ","name":"Light"},{"components":[{"ins":{"rotation":{"value":[160.020010471344,0,160.020010471344]}},"type":"CTransform","id":"g78HaXRUwAxh"},{"type":"CMesh","id":"XMatZMrGfFbw"},{"outs":{"self":{"links":[{"id":"XMatZMrGfFbw","key":"geometry"}]}},"type":"CBox","id":"ZS75iMCkQA9m"},{"outs":{"self":{"links":[{"id":"XMatZMrGfFbw","key":"material"}]}},"type":"CPhongMaterial","id":"ntBkdbEoNSym"},{"ins":{"mipmaps":{"value":false}},"outs":{"self":{"links":[{"id":"ntBkdbEoNSym","key":"colorMap"}]}},"type":"CVideoTexture","id":"lXyJ488ckbRz"}],"type":"Node","id":"oVDu2VcEvDAA","name":"Box"},{"components":[{"ins":{"run":{"value":true},"max":{"value":180},"duration":{"value":2}},"outs":{"value":{"links":[{"id":"g78HaXRUwAxh","key":"rotation","dstIndex":0},{"id":"g78HaXRUwAxh","key":"rotation","dstIndex":2}]}},"type":"COscillator","id":"0yICxXjjo4je","name":"Rotator"}],"type":"Node","id":"nbaB0ro0CV07","name":"Aux"}]},"type":"CRenderGraph","id":"i0iFjHQdzy8c"}],"type":"Node","id":"ZguW1dsXcxeW","name":"Scene"}]}`;
             this.system.fromJSON(JSON.parse(scene));
         }
         else {
@@ -70,35 +74,11 @@ export class Application extends CustomElement
             const main = mainGraph.createNode("Main");
             main.createComponent(CPulse);
             main.createComponent(CRenderer);
-            main.createComponent(CPickSelection).createActions(this.commander);
-            const sceneGraph = main.createComponent(CGraph).innerGraph;
+            main.createComponent(CPickSelection);
 
-            const scene = helper.createScene(sceneGraph, "Scene");
-            scene.createComponent(CBackground);
-            scene.createComponent(CFloor);
-            scene.createComponent(CGrid);
-
-
-            const camera = helper.createCamera(scene, "Camera");
-            camera.components.get(CCamera).ins.position.setValue([ 0, 0, 50 ]);
-            camera.createComponent(CNavigator);
-
-            const light = helper.createSpotLight(scene, "Light");
-            light.components.get(CSpotLight).ins.position.setValue([ 0, 10, 1 ]);
-
-            const box = helper.createBox(scene, "Box");
-            const boxTransform = box.components.get(CTransform);
-            const tex = box.createComponent(CVideoTexture);
-            box.getComponent(CPhongMaterial).ins.colorMap.linkFrom(tex.outs.self);
-
-            const aux = sceneGraph.createNode("Aux");
-            const osc = aux.createComponent(COscillator, "Rotator");
-
-            osc.ins.max.setValue(180);
-            osc.ins.duration.setValue(2);
-            osc.ins.start.set();
-            osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 0);
-            osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 2);
+            const scene = helper.createScene(mainGraph, "Scene");
+            const document = scene.createComponent(CRenderGraph);
+            this.initDocument(document);
         }
 
 
@@ -106,6 +86,38 @@ export class Application extends CustomElement
         //setTimeout(() => console.log(this.system.graph.toString(true)), 100);
 
         window["dump"] = () => console.log(JSON.stringify(this.system.toJSON()));
+        window["clear"] = () => this.system.getMainComponent(CRenderGraph).clearInnerGraph();
+        window["init"] = () => this.initDocument(this.system.getMainComponent(CRenderGraph));
+    }
+
+    protected initDocument(document: CRenderGraph)
+    {
+        const root = document.innerGraph.createNode("Root");
+        root.createComponent(CTransform);
+        root.createComponent(CBackground);
+        root.createComponent(CFloor);
+        root.createComponent(CGrid);
+
+        const camera = helper.createCamera(root, "Camera");
+        camera.components.get(CCamera).ins.position.setValue([ 0, 0, 50 ]);
+        camera.createComponent(CNavigator);
+
+        const light = helper.createSpotLight(root, "Light");
+        light.components.get(CSpotLight).ins.position.setValue([ 0, 10, 1 ]);
+
+        const box = helper.createBox(root, "Box");
+        const boxTransform = box.components.get(CTransform);
+        const tex = box.createComponent(CVideoTexture);
+        box.getComponent(CPhongMaterial).ins.colorMap.linkFrom(tex.outs.self);
+
+        const aux = document.innerGraph.createNode("Aux");
+        const osc = aux.createComponent(COscillator, "Rotator");
+
+        osc.ins.max.setValue(180);
+        osc.ins.duration.setValue(2);
+        osc.ins.start.set();
+        osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 0);
+        osc.outs.value.linkTo(boxTransform.ins.rotation, undefined, 2);
     }
 
     firstUpdated()
