@@ -60,6 +60,12 @@ const apps = {
         entryPoint: "client/Trees.ts",
         element: "ff-foundation-trees",
         title: "FF Trees"
+    },
+    "benchmarks": {
+        name: "benchmarks",
+        entryPoint: "client/Benchmarks.ts",
+        element: "ff-benchmarks",
+        title: "FF Benchmarks"
     }
 };
 
@@ -197,7 +203,8 @@ function createAppConfig(app, dirs, isDevMode)
         externals: {
             "three": "THREE",
             "react": "React",
-            "react-dom": "ReactDOM"
+            "react-dom": "ReactDOM",
+            "benchmark": "Benchmark",
         }
     };
 

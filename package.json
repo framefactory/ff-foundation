@@ -5,7 +5,8 @@
     "scripts": {
         "start": "npm run server",
         "server": "nodemon services/server/bin/index.js",
-        "watch": "npm run watch-editor",
+        "watch": "npm run watch-all",
+        "watch-all": "concurrently \"cd source/client && webpack --watch --app=all\" \"tsc -b source/server -w\" \"nodemon services/server/bin/index.js\"",
         "watch-editor": "concurrently \"cd source/client && webpack --watch --app=editor\" \"tsc -b source/server -w\" \"nodemon services/server/bin/index.js\"",
         "watch-components": "concurrently \"cd source/client && webpack --watch --app=components\" \"tsc -b libs -w\" \"tsc -b source/server -w\" \"nodemon services/server/bin/index.js\"",
         "build": "concurrently \"npm run build-server\" \"npm run build-dev\"",
@@ -54,6 +55,7 @@
     },
     "homepage": "https://github.com/framelab/ff-foundation#readme",
     "dependencies": {
+        "benchmark": "^2.1.4",
         "body-parser": "^1.18.3",
         "cookie-parser": "^1.4.4",
         "express": "^4.16.4",
@@ -64,6 +66,7 @@
         "moment": "^2.24.0",
         "morgan": "^1.9.1",
         "nodemon": "^1.18.10",
+        "platform": "^1.3.5",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
         "source-map-support": "^0.5.10",
@@ -71,6 +74,7 @@
         "xml-js": "^1.6.11"
     },
     "devDependencies": {
+        "@types/benchmark": "^1.0.31",
         "@types/chai": "^4.1.7",
         "@types/mocha": "^5.2.6",
         "@types/node": "^10.12.30",
