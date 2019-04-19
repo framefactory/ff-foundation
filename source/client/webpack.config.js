@@ -66,7 +66,13 @@ const apps = {
         entryPoint: "client/Benchmarks.ts",
         element: "ff-benchmarks",
         title: "FF Benchmarks"
-    }
+    },
+    "transition": {
+        name: "transition",
+        entryPoint: "client/Transition.ts",
+        element: "ff-foundation-transition",
+        title: "FF Transition"
+    },
 };
 
 ////////////////////////////////////////////////////////////////////////////////
