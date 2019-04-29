@@ -17,3 +17,56 @@ ff-application {
     flex: 1 1 auto;
   }
 }
+
+.ff-slide-transition {
+  display: inline-block;
+  transition: height 1000ms;
+  overflow: hidden;
+
+  &.ff-enter {
+  }
+  &.ff-leave {
+  }
+  &.ff-out {
+    //display: none;
+  }
+}
+
+.ff-fade-transition {
+  display: inline-block;
+
+  &.ff-enter {
+    opacity: 1;
+    transition: opacity 1000ms;
+  }
+  &.ff-leave {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+  &.ff-out {
+    display: none;
+  }
+}
+
+ff-test {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #1f6699;
+}
+
+
+//.ff-out {
+//  ff-test {
+//    opacity: 0;
+//  }
+//}
+//
+//.ff-in {
+//  ff-test {
+//    opacity: 1;
+//  }
+//}
+
