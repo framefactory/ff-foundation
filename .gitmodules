@@ -19,3 +19,9 @@
 [submodule "libs/ff-scene"]
 	path = libs/ff-scene
 	url = git@github.com:framelab/ff-scene.git
+[submodule "libs/ff-gl"]
+	path = libs/ff-gl
+	url = git@github.com:framelab/ff-gl.git
+[submodule "libs/trinity"]
+	path = libs/trinity
+	url = git@github.com:framelab/trinity.git

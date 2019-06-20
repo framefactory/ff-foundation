@@ -9,6 +9,7 @@
 
 const fs = require("fs-extra");
 const path = require("path");
+const webpack = require("webpack");
 
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -73,6 +74,12 @@ const apps = {
         element: "ff-foundation-transition",
         title: "FF Transition"
     },
+    "viewer": {
+        name: "viewer",
+        entryPoint: "client/Viewer.ts",
+        element: "ff-viewer",
+        title: "FF Viewer"
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,6 +153,11 @@ function createAppConfig(app, dirs, isDevMode)
         },
 
         plugins: [
+            new webpack.DefinePlugin({
+                ENV_PRODUCTION: JSON.stringify(!isDevMode),
+                ENV_DEVELOPMENT: JSON.stringify(isDevMode),
+                ENV_VERSION: JSON.stringify(appTitle),
+            }),
             new MiniCssExtractPlugin({
                 filename: isDevMode ? "css/[name].dev.css" : "css/[name].min.css",
                 allChunks: true
@@ -184,7 +196,7 @@ function createAppConfig(app, dirs, isDevMode)
                     test: /\.scss$/,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        { loader: "css-loader", options: { minimize: !isDevMode } },
+                        "css-loader",
                         "sass-loader"
                     ]
                 },
@@ -193,8 +205,8 @@ function createAppConfig(app, dirs, isDevMode)
                     test: /\.css$/,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        'style-loader',
-                        { loader: "css-loader", options: { minimize: !isDevMode } },
+                        "style-loader",
+                        "css-loader",
                     ]
                 },
                 {

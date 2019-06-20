@@ -13,5 +13,7 @@ pull ff-browser
 pull ff-graph
 pull ff-ui
 pull ff-react
-pull ff-scene
+pull ff-gl
 pull ff-three
+pull ff-scene
+pull trinity

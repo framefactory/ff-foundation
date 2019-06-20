@@ -5,8 +5,10 @@
         { "path": "ff-graph/tsconfig.module.json" },
         { "path": "ff-ui/tsconfig.module.json" },
         { "path": "ff-react/tsconfig.module.json" },
+        { "path": "ff-gl/tsconfig.module.json" },
         { "path": "ff-three/tsconfig.module.json" },
-        { "path": "ff-scene/tsconfig.module.json" }
+        { "path": "ff-scene/tsconfig.module.json" },
+        { "path": "trinity/tsconfig.module.json" }
     ],
     "compilerOptions": {
         "composite": true
