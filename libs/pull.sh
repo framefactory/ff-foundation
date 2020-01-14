@@ -16,4 +16,3 @@ pull ff-react
 pull ff-gl
 pull ff-three
 pull ff-scene
-pull trinity

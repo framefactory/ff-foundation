@@ -35,49 +35,49 @@ const apps = {
     "components": {
         name: "components",
         entryPoint: "client/Components.ts",
-        element: "ff-foundation-components",
+        element: "ff-application",
         title: "FF Components"
     },
     "controls": {
         name: "controls",
         entryPoint: "client/Controls.ts",
-        element: "ff-foundation-controls",
+        element: "ff-application",
         title: "FF Controls"
     },
     "editor": {
         name: "editor",
         entryPoint: "client/Editor.ts",
-        element: "ff-foundation-editor",
+        element: "ff-application",
         title: "FF Editor"
     },
     "panels": {
         name: "panels",
         entryPoint: "client/Panels.ts",
-        element: "ff-foundation-panels",
+        element: "ff-application",
         title: "FF Panels"
     },
     "trees": {
         name: "trees",
         entryPoint: "client/Trees.ts",
-        element: "ff-foundation-trees",
+        element: "ff-application",
         title: "FF Trees"
     },
     "benchmarks": {
         name: "benchmarks",
         entryPoint: "client/Benchmarks.ts",
-        element: "ff-benchmarks",
+        element: "ff-application",
         title: "FF Benchmarks"
     },
     "transition": {
         name: "transition",
         entryPoint: "client/Transition.ts",
-        element: "ff-foundation-transition",
+        element: "ff-application",
         title: "FF Transition"
     },
     "viewer": {
         name: "viewer",
         entryPoint: "client/Viewer.ts",
-        element: "ff-viewer",
+        element: "ff-application",
         title: "FF Viewer"
     }
 };

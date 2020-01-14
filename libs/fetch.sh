@@ -16,4 +16,3 @@ fetch ff-react
 fetch ff-gl
 fetch ff-three
 fetch ff-scene
-fetch trinity

@@ -12,7 +12,7 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-foundation-panels")
+@customElement("ff-application")
 export class Application extends CustomElement
 {
     protected useLayout = false;
@@ -26,11 +26,11 @@ export class Application extends CustomElement
         const registry: DockContentRegistry = new Map();
         registry.set("test", () => document.createElement("div"));
 
-        const dockView = new DockView();
+        const dockView = this.appendElement(DockView);
+
         dockView.addEventListener(DockView.changeEvent, e => {
             console.log(dockView.getLayout());
         });
-        this.appendChild(dockView);
 
         dockView.setLayout({
             size: 1,

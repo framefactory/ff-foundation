@@ -9,44 +9,67 @@ import * as sourceMapSupport from "source-map-support";
 sourceMapSupport.install();
 
 import * as path from "path";
+import * as http from "http";
 
-import ExpressServer, { IExpressServerConfiguration } from "./ExpressServer";
+import * as express from "express";
+import * as morgan from "morgan";
 
 ////////////////////////////////////////////////////////////////////////////////
 // CONFIGURATION
 
-const port = parseInt(process.env["NODE_SERVER_PORT"]) || 8000;
-const devMode = process.env.NODE_ENV !== "production";
-const localMode = process.env.NODE_SERVER_LOCAL === "true";
-const rootDir = process.env["NODE_SERVER_ROOT"] || path.resolve(__dirname, "../../..");
-const staticDir = path.resolve(rootDir, "../../dist/");
-const docDir = path.resolve(rootDir, "../../doc/code");
+const port: number = parseInt(process.env["FOUNDATION_SERVER_PORT"]) || 8000;
+const devMode: boolean = process.env["NODE_ENV"] !== "production";
+
+const rootDir = path.resolve(__dirname, "../../..");
+const staticDir = path.resolve(rootDir, "dist/");
+const docDir = path.resolve(rootDir, "docs/_site/");
 
 ////////////////////////////////////////////////////////////////////////////////
 // CONFIGURE, START SERVER
 
-console.log([
-    "",
-    "--------------------",
-    "FF Foundation Server",
-    "--------------------",
-    "Port: " + port,
-    "Root Directory: " + rootDir,
-    "Development Mode: " + devMode,
-    "Local Mode: " + localMode
-].join("\n"));
+console.log(`
 
-const expressServerConfig: IExpressServerConfiguration = {
-    port,
-    enableDevMode: devMode,
-    enableLogging: devMode,
-    staticRoute: "/",
-    staticDir,
-    docDir
-};
+--------------------------------",
+FF Foundation Development Server",
+--------------------------------",
+Port:              ${port}
+Root Directory:    ${rootDir}
+Development Mode:  ${devMode}
 
-const expressServer = new ExpressServer(expressServerConfig);
+`);
 
-expressServer.start().then(() => {
-    console.info(`\nServer ready and listening on port ${port}`);
+////////////////////////////////////////////////////////////////////////////////
+
+const app = express();
+app.disable('x-powered-by');
+
+// logging
+if (devMode) {
+    app.use(morgan("tiny"));
+}
+
+// static file server
+app.use("/", express.static(staticDir));
+
+// error handling
+app.use((error, req, res, next) => {
+    console.error(error);
+
+    if (res.headersSent) {
+        return next(error);
+    }
+
+    if (req.accepts("json")) {
+        // send JSON formatted error
+        res.status(500).send({ error: `${error.name}: ${error.message}` });
+    }
+    else {
+        // send error page
+        res.status(500).render("errors/500", { error });
+    }
+});
+
+const server = new http.Server(app);
+server.listen(port, () => {
+    console.info(`Server ready and listening on port ${port}\n`);
 });

@@ -7,6 +7,8 @@
 
 import CustomElement, { customElement, html } from "@ff/ui/CustomElement";
 
+import Dial from "@ff/ui/Dial";
+
 import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////

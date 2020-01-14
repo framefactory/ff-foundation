@@ -16,4 +16,3 @@ status ff-react
 status ff-gl
 status ff-three
 status ff-scene
-status trinity

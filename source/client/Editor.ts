@@ -12,8 +12,8 @@ import CGraph from "@ff/graph/components/CGraph";
 import CPulse from "@ff/graph/components/CPulse";
 import COscillator from "@ff/graph/components/COscillator";
 
-import { componentTypes } from "@ff/graph/components";
-import { componentTypes as componentTypes3D } from "@ff/scene/components";
+import { components as graphComponents } from "@ff/graph/components";
+import { components as sceneComponents } from "@ff/scene/components";
 
 import CRenderer from "@ff/scene/components/CRenderer";
 import CPickSelection from "@ff/scene/components/CPickSelection";
@@ -29,6 +29,8 @@ import CNavigator from "@ff/scene/components/CNavigator";
 import CPhongMaterial from "@ff/scene/components/CPhongMaterial";
 import CImageTexture from "@ff/scene/components/CImageTexture";
 import CVideoTexture from "@ff/scene/components/CVideoTexture";
+import CScene from "@ff/scene/components/CScene";
+import CRenderGraph from "@ff/scene/components/CRenderGraph";
 
 import * as helper from "@ff/scene/helper";
 
@@ -41,12 +43,10 @@ import PropertyTreeView from "./editor/PropertyTreeView";
 import CustomElement, { customElement } from "@ff/ui/CustomElement";
 
 import "./styles.scss";
-import CScene from "@ff/scene/components/CScene";
-import CRenderGraph from "@ff/scene/components/CRenderGraph";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-foundation-editor")
+@customElement("ff-application")
 export class Application extends CustomElement
 {
     protected system: System;
@@ -57,8 +57,8 @@ export class Application extends CustomElement
         super();
 
         this.system = new System();
-        this.system.registry.add(componentTypes);
-        this.system.registry.add(componentTypes3D);
+        this.system.registry.add(graphComponents);
+        this.system.registry.add(sceneComponents);
         this.system.registry.add(Node);
 
         const inflate = true;
@@ -127,10 +127,7 @@ export class Application extends CustomElement
         registry.set("hierarchy", () => new HierarchyTreeView(this.system));
         registry.set("properties", () => new PropertyTreeView(this.system));
 
-        const dockView = this.appendElement(DockView, {
-            position: "absolute",
-            top: "0", left: "0", bottom: "0", right: "0"
-        });
+        const dockView = this.appendElement(DockView);
 
         dockView.setLayout({
             type: "strip",

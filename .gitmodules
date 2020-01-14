@@ -1,27 +1,24 @@
 [submodule "libs/ff-core"]
 	path = libs/ff-core
-	url = git@github.com:framelab/ff-core.git
+	url = git@github.com:framefactory/ff-core.git
 [submodule "libs/ff-ui"]
 	path = libs/ff-ui
-	url = git@github.com:framelab/ff-ui.git
+	url = git@github.com:framefactory/ff-ui.git
 [submodule "libs/ff-react"]
 	path = libs/ff-react
-	url = git@github.com:framelab/ff-react.git
+	url = git@github.com:framefactory/ff-react.git
 [submodule "libs/ff-three"]
 	path = libs/ff-three
-	url = git@github.com:framelab/ff-three.git
+	url = git@github.com:framefactory/ff-three.git
 [submodule "libs/ff-browser"]
 	path = libs/ff-browser
-	url = git@github.com:framelab/ff-browser.git
+	url = git@github.com:framefactory/ff-browser.git
 [submodule "libs/ff-graph"]
 	path = libs/ff-graph
-	url = git@github.com:framelab/ff-graph.git
+	url = git@github.com:framefactory/ff-graph.git
 [submodule "libs/ff-scene"]
 	path = libs/ff-scene
-	url = git@github.com:framelab/ff-scene.git
+	url = git@github.com:framefactory/ff-scene.git
 [submodule "libs/ff-gl"]
 	path = libs/ff-gl
-	url = git@github.com:framelab/ff-gl.git
-[submodule "libs/trinity"]
-	path = libs/trinity
-	url = git@github.com:framelab/trinity.git
+	url = git@github.com:framefactory/ff-gl.git

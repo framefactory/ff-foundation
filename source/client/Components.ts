@@ -39,7 +39,7 @@ Icon.add("scale", html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-foundation-components")
+@customElement("ff-application")
 export class Application extends CustomElement
 {
     protected firstUpdated()
@@ -74,22 +74,24 @@ export class Application extends CustomElement
         const color = new Color().setHSV(180, 0.5, 0.5).setAlpha(0);
 
         return html`
-            <div class="ff-flex-row ff-frame">
-                <ff-button text="Button 1" checked title="Button 1 Title" caret></ff-button>
-                <ff-dropdown text="Dropdown 2" icon="close" .items=${items} itemIndex="0" @select=${this.onMenuSelect}></ff-dropdown>
-                <ff-button text="Long Button 3" icon="save"></ff-button>
-                <ff-button text="Long Button 4" icon="atom"></ff-button>
-                <ff-button text="Long Button 5" icon="bath" caret up></ff-button>
-                <ff-button icon="bullhorn" selectable></ff-button>
+            <div>
+                <div class="ff-flex-row ff-frame">
+                    <ff-button text="Button 1" checked title="Button 1 Title" caret></ff-button>
+                    <ff-dropdown text="Dropdown 2" icon="close" .items=${items} itemIndex="0" @select=${this.onMenuSelect}></ff-dropdown>
+                    <ff-button text="Long Button 3" icon="save"></ff-button>
+                    <ff-button text="Long Button 4" icon="atom"></ff-button>
+                    <ff-button text="Long Button 5" icon="bath" caret up></ff-button>
+                    <ff-button icon="bullhorn" selectable></ff-button>
+                </div>
+    
+                <div class="ff-flex-row ff-frame">
+                    <ff-color-edit .color=${color} style="height: 200px; width: 230px;" alpha numeric @change=${this.onColorChange}>
+                    </ff-color-edit>
+                    
+                    <ff-color-button selectable style="height: 30px; width: 30px;"></ff-color-button>
+                </div>
             </div>
-
-            <div class="ff-flex-row ff-frame">
-                <ff-color-edit .color=${color} style="height: 200px; width: 230px;" alpha numeric @change=${this.onColorChange}>
-                </ff-color-edit>
-                
-                <ff-color-button selectable style="height: 30px; width: 30px;"></ff-color-button>
-            </div>
-
+            
             <ff-dialog center style="width:180px;">
                 <ff-title-bar title="Hello Dialog a very long dialog" draggable closable></ff-title-bar>
                 <div class="ff-frame">

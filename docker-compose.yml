@@ -9,8 +9,8 @@ services:
       context: ./services/server/setup
       dockerfile: Dockerfile
     env_file:
-      - services/config.env
-    ports: #host:container
-      - "9010:8000"
+      - .env
+    ports: # host:container
+      - $FOUNDATION_SERVER_PORT:$FOUNDATION_SERVER_PORT
     volumes:
       - .:/app

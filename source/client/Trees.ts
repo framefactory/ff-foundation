@@ -18,7 +18,7 @@ import "./styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@customElement("ff-foundation-trees")
+@customElement("ff-application")
 export class Application extends CustomElement
 {
     render()
@@ -34,7 +34,7 @@ export class Application extends CustomElement
         propField1.index = 1;
 
         return html`
-            <ff-dock-view>
+            <ff-dock-view class="fullsize">
                 <ff-dock-strip direction="horizontal">
                     <ff-dock-stack>
                         <ff-dock-panel text="Tree">
