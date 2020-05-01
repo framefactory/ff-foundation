@@ -21,7 +21,6 @@ catch {}
 ////////////////////////////////////////////////////////////////////////////////
 // PROJECT / COMPONENTS
 
-
 const projectDir = path.resolve(__dirname, "../..");
 
 const dirs = {
