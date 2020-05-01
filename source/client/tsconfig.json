@@ -2,22 +2,23 @@
     "compilerOptions": {
         "noEmit": true,
         "target": "ES6",
-        "module": "commonjs",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
         "sourceMap": true,
-        "jsx": "react",
-        "resolveJsonModule": true,
         "experimentalDecorators": true,
+        "jsx": "react",
 
         "baseUrl": ".",
         "paths": {
             "client/*": [ "./*" ],
-            "@ff/core/*": [ "../../libs/ff-core/source/*"],
-            "@ff/browser/*": [ "../../libs/ff-browser/source/*"],
-            "@ff/ui/*": [ "../../libs/ff-ui/source/*"],
-            "@ff/react/*": [ "../../libs/ff-react/source/*"],
+            "@ff/browser/*": [ "../../libs/ff-browser/source/*" ],
+            "@ff/core/*": [ "../../libs/ff-core/source/*" ],
+            "@ff/gl/*": [ "../../libs/ff-gl/source/*" ],
             "@ff/graph/*": [ "../../libs/ff-graph/source/*"],
+            "@ff/react/*": [ "../../libs/ff-react/source/*"],
+            "@ff/scene/*": [ "../../libs/ff-scene/source/*"],
             "@ff/three/*": [ "../../libs/ff-three/source/*"],
-            "@ff/scene/*": [ "../../libs/ff-scene/source/*"]
+            "@ff/ui/*": [ "../../libs/ff-ui/source/*" ]
         }
     }
 }

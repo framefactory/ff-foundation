@@ -2,15 +2,14 @@ version: '3'
 
 services:
   server:
-    image: foundation/server
+    image: framefactory/node
     container_name: foundation-server
     restart: always
-    build:
-      context: ./services/server/setup
-      dockerfile: Dockerfile
+    command: [ "npm", "run", "$NPM_SCRIPT" ]
+
     env_file:
       - .env
-    ports: # host:container
-      - $FOUNDATION_SERVER_PORT:$FOUNDATION_SERVER_PORT
+    ports:
+      - $DOCKER_SERVER_PORT:$DOCKER_SERVER_PORT
     volumes:
       - .:/app

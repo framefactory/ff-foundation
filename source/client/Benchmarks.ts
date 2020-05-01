@@ -9,7 +9,7 @@ import Property, { types } from "@ff/graph/Property";
 
 import CustomElement, { customElement, html, property } from "@ff/ui/CustomElement";
 
-import * as Benchmark from "benchmark";
+//import * as Benchmark from "benchmark";
 
 ////////////////////////////////////////////////////////////////////////////////
 

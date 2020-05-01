@@ -1,14 +1,10 @@
-/**
- * FF Typescript Foundation Library
- * Copyright 2018 Ralph Wiedemeier, Frame Factory GmbH
- *
- * License: MIT
- */
-
 "use strict";
 
-const fs = require("fs-extra");
+require("dotenv").config();
+
 const path = require("path");
+const mkdirp = require("mkdirp");
+const childProcess = require("child_process");
 const webpack = require("webpack");
 
 const TerserPlugin = require("terser-webpack-plugin");
@@ -16,139 +12,218 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
-////////////////////////////////////////////////////////////////////////////////
+let projectVersion = "v0.0.0";
+try {
+    projectVersion = childProcess.execSync("git describe --tags").toString().trim();
+}
+catch {}
 
-const project = path.resolve(__dirname, "../..");
+////////////////////////////////////////////////////////////////////////////////
+// PROJECT / COMPONENTS
+
+
+const projectDir = path.resolve(__dirname, "../..");
 
 const dirs = {
-    project,
-    source: path.resolve(project, "source"),
-    assets: path.resolve(project, "assets"),
-    output: path.resolve(project, "dist"),
-    modules: path.resolve(project, "node_modules"),
-    libs: path.resolve(project, "libs")
+    source: path.resolve(projectDir, "source"),
+    assets: path.resolve(projectDir, "assets"),
+    output: path.resolve(projectDir, "services/server"),
+    modules: path.resolve(projectDir, "node_modules"),
+    libs: path.resolve(projectDir, "libs"),
 };
+
+// create folders if necessary
+mkdirp.sync(dirs.output)
+
+// module search paths
+const modules = [
+    dirs.libs,
+    dirs.modules,
+];
+
+// import aliases
+const alias = {
+    "client": path.resolve(dirs.source, "client"),
+    "@ff/browser": "ff-browser/source",
+    "@ff/core": "ff-core/source",
+    "@ff/gl": "ff-gl/source",
+    "@ff/graph": "ff-graph/source",
+    "@ff/react": "ff-react/source",
+    "@ff/scene": "ff-scene/source",
+    "@ff/three": "ff-three/source",
+    "@ff/ui": "ff-ui/source",
+};
+
+// static assets to be copied to build output
+const assets = [
+    // { source: path.resolve(dirs.assets, "image.jpg"), target: path.resolve(dirs.output, "images/image.jpg") }
+];
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const apps = {
-    "components": {
+const components = {
+    "default": {
         name: "components",
-        entryPoint: "client/Components.ts",
+        title: "FF Components",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Components.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Components"
     },
     "controls": {
         name: "controls",
-        entryPoint: "client/Controls.ts",
+        title: "FF Controls",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Controls.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Controls"
     },
     "editor": {
         name: "editor",
-        entryPoint: "client/Editor.ts",
+        title: "FF Editor",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Editor.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Editor"
     },
     "panels": {
         name: "panels",
-        entryPoint: "client/Panels.ts",
+        title: "FF Panels",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Panels.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Panels"
     },
     "trees": {
         name: "trees",
-        entryPoint: "client/Trees.ts",
+        title: "FF Trees",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Trees.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Trees"
     },
     "benchmarks": {
         name: "benchmarks",
-        entryPoint: "client/Benchmarks.ts",
+        title: "FF Benchmarks",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Benchmarks.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Benchmarks"
     },
     "transition": {
         name: "transition",
-        entryPoint: "client/Transition.ts",
+        title: "FF Transition",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Transition.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Transition"
     },
     "viewer": {
         name: "viewer",
-        entryPoint: "client/Viewer.ts",
+        title: "FF Viewer",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/Viewer.ts",
+        template: "client/index.hbs",
         element: "ff-application",
-        title: "FF Viewer"
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
-module.exports = function(env, argv) {
-
-    const isDevMode = argv.mode !== "production";
-    const app = argv.app || "explorer";
-
-    // copy static assets
-    fs.copy(dirs.assets, dirs.output, { overwrite: true });
-
-    if (app === "all") {
-        return Object.keys(apps).map(key => createAppConfig(key, dirs, isDevMode));
-    }
-    else {
-        return createAppConfig(app, dirs, isDevMode);
-    }
-};
-
-function createAppConfig(app, dirs, isDevMode)
+module.exports = function(env, argv)
 {
-    const devMode = isDevMode ? "development" : "production";
+    const environment = {
+        isDevMode: argv.mode !== undefined ? argv.mode !== "production" : process.env["NODE_ENV"] !== "production",
+    };
 
-    const appName = apps[app].name;
-    const appEntryPoint = apps[app].entryPoint;
-    const appTitle = apps[app].title;
-    const appElement = apps[app].element;
+    console.log(`
+WEBPACK - PROJECT BUILD CONFIGURATION
+      build mode: ${environment.isDevMode ? "development" : "production"}
+   source folder: ${dirs.source}
+   output folder: ${dirs.output}
+  modules folder: ${dirs.modules}
+  library folder: ${dirs.libs}`);
 
-    console.log("VOYAGER - WEBPACK BUILD SCRIPT");
-    console.log("application = %s", appName);
-    console.log("mode = %s", devMode);
-    console.log("output directory = %s", dirs.output);
+    // copy assets
+    assets.forEach(asset => {
+        fs.copySync(asset.source, asset.target, { overwrite: true });
+    });
 
-    const config = {
-        mode: devMode,
+    const componentKey = argv.component !== undefined ? argv.component : "default";
 
-        entry: { [appName]: path.resolve(dirs.source, appEntryPoint) },
+    if (componentKey === "all") {
+        return Object.keys(components).map(key => createBuildConfiguration(environment, dirs, components[key]));
+    }
+
+    return createBuildConfiguration(environment, dirs, components[componentKey]);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+function createBuildConfiguration(environment, dirs, component)
+{
+    const isDevMode = environment.isDevMode;
+    const buildMode = isDevMode ? "development" : "production";
+    const devTool = isDevMode ? "source-map" : undefined;
+
+    const displayTitle = `${component.title} ${component.version} ${isDevMode ? "DEV" : "PROD"}`;
+
+    const outputDir = path.resolve(dirs.output, component.subdir);
+    mkdirp.sync(outputDir);
+
+    const jsOutputFileName = isDevMode ? "js/[name].dev.js" : "js/[name].min.js";
+    const cssOutputFileName = isDevMode ? "css/[name].dev.css" : "css/[name].min.css";
+    const htmlOutputFileName = isDevMode ? `${component.name}.dev.html` : `${component.name}.html`;
+    const htmlElement = component.element ? `<${component.element}></${component.element}>` : undefined;
+
+    console.log(`
+WEBPACK - COMPONENT BUILD CONFIGURATION
+     component: ${component.name}
+         title: ${displayTitle}
+       version: ${component.version}
+ output folder: ${outputDir}
+       js file: ${jsOutputFileName}
+      css file: ${cssOutputFileName}
+     html file: ${htmlOutputFileName}
+  html element: ${htmlElement}`);
+
+    return {
+        mode: buildMode,
+        devtool: devTool,
+
+        entry: {
+            [component.name]: path.resolve(dirs.source, component.entry),
+        },
 
         output: {
-            path: dirs.output,
-            filename: isDevMode ? "js/[name].dev.js" : "js/[name].min.js"
+            path: outputDir,
+            filename: jsOutputFileName,
         },
 
         resolve: {
-            modules: [
-                dirs.modules
-            ],
-            // Aliases for FF Foundation Library components
-            alias: {
-                "common": path.resolve(dirs.source, "common"),
-                "@ff/core": path.resolve(dirs.libs, "ff-core/source"),
-                "@ff/graph": path.resolve(dirs.libs, "ff-graph/source"),
-                "@ff/ui": path.resolve(dirs.libs, "ff-ui/source"),
-                "@ff/react": path.resolve(dirs.libs, "ff-react/source"),
-                "@ff/browser": path.resolve(dirs.libs, "ff-browser/source"),
-                "@ff/three": path.resolve(dirs.libs, "ff-three/source"),
-                "@ff/scene": path.resolve(dirs.libs, "ff-scene/source")
-            },
+            // module search paths
+            modules,
+            // library aliases
+            alias,
             // Resolvable extensions
-            extensions: [".ts", ".tsx", ".js", ".json"]
+            extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
         },
+
 
         optimization: {
             minimize: !isDevMode,
 
             minimizer: [
                 new TerserPlugin({ parallel: true }),
-                new OptimizeCSSAssetsPlugin({})
+                new OptimizeCSSAssetsPlugin({}),
             ]
         },
 
@@ -156,79 +231,67 @@ function createAppConfig(app, dirs, isDevMode)
             new webpack.DefinePlugin({
                 ENV_PRODUCTION: JSON.stringify(!isDevMode),
                 ENV_DEVELOPMENT: JSON.stringify(isDevMode),
-                ENV_VERSION: JSON.stringify(appTitle),
+                ENV_VERSION: JSON.stringify(component.version),
             }),
             new MiniCssExtractPlugin({
-                filename: isDevMode ? "css/[name].dev.css" : "css/[name].min.css",
-                allChunks: true
+                filename: cssOutputFileName,
+                allChunks: true,
             }),
             new HTMLWebpackPlugin({
-                filename: isDevMode ? `${appName}-dev.html` : `${appName}.html`,
-                template: "index.hbs",
-                title: appTitle,
+                filename: htmlOutputFileName,
+                template: path.resolve(dirs.source, component.template),
+                title: displayTitle,
+                version: component.version,
                 isDevelopment: isDevMode,
-                element: `<${appElement}></${appElement}>`,
-                chunks: [ appName ]
+                element: htmlElement,
+                chunks: [ component.name ],
             })
         ],
 
-        // loaders execute transforms on a per-file basis
         module: {
             rules: [
+                {
+                    // Enforce source maps for all javascript files
+                    enforce: "pre",
+                    test: /\.js$/,
+                    loader: "source-map-loader",
+                },
+                {
+                    // Typescript
+                    test: /\.tsx?$/,
+                    use: [{
+                        loader: "ts-loader",
+                        options: { compilerOptions: { noEmit: false } },
+                    }],
+                },
                 {
                     // Raw text and shader files
                     test: /\.(txt|glsl|hlsl|frag|vert|fs|vs)$/,
                     loader: "raw-loader"
                 },
                 {
-                    // Typescript/JSX files
-                    test: /\.tsx?$/,
-                    loader: "awesome-typescript-loader"
-                },
-                {
-                    // Enforce source maps for all javascript files
-                    enforce: "pre",
-                    test: /\.js$/,
-                    loader: "source-map-loader"
-                },
-                {
-                    // Transpile SCSS to CSS and concatenate
-                    test: /\.scss$/,
+                    // SCSS
+                    test: /\.s[ac]ss$/i,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        "css-loader",
-                        "sass-loader"
-                    ]
+                        'css-loader',
+                        'sass-loader',
+                    ],
                 },
                 {
-                    // Concatenate CSS
+                    // CSS
                     test: /\.css$/,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        "style-loader",
                         "css-loader",
                     ]
                 },
                 {
+                    // Handlebars templates
                     test: /\.hbs$/,
-                    loader: "handlebars-loader"
-                }
-            ]
+                    loader: "handlebars-loader",
+                },
+            ],
         },
-
-        // When importing a module whose path matches one of the following, just
-        // assume a corresponding global variable exists and use that instead.
-        externals: {
-            "three": "THREE",
-            "react": "React",
-            "react-dom": "ReactDOM",
-            "benchmark": "Benchmark",
-        }
     };
-
-    if (isDevMode) {
-        config.devtool = "source-map";
-    }
-
-    return config;
 }

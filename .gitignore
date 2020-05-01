@@ -4,15 +4,12 @@
 .cache/
 node_modules/
 
-dist/
-test/
-doc/code
-services/server/bin
-services/server/static/app
-services/server/static/libs
+doc/
+built/
+services/server/bin/
+services/db/data/
 
 # FILES
+.env
 *.log
 .DS_Store
-.env
-secrets.env

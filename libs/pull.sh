@@ -8,11 +8,11 @@ function pull {
     cd ..
 }
 
-pull ff-core
 pull ff-browser
-pull ff-graph
-pull ff-ui
-pull ff-react
+pull ff-core
 pull ff-gl
-pull ff-three
+pull ff-graph
+pull ff-react
 pull ff-scene
+pull ff-three
+pull ff-ui

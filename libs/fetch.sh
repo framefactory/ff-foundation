@@ -8,11 +8,11 @@ function fetch {
     cd ..
 }
 
-fetch ff-core
 fetch ff-browser
-fetch ff-graph
-fetch ff-ui
-fetch ff-react
+fetch ff-core
 fetch ff-gl
-fetch ff-three
+fetch ff-graph
+fetch ff-react
 fetch ff-scene
+fetch ff-three
+fetch ff-ui

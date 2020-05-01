@@ -8,11 +8,11 @@ function status {
     cd ..
 }
 
-status ff-core
 status ff-browser
-status ff-graph
-status ff-ui
-status ff-react
+status ff-core
 status ff-gl
-status ff-three
+status ff-graph
+status ff-react
 status ff-scene
+status ff-three
+status ff-ui
