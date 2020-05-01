@@ -8,11 +8,7 @@ function fetch {
     cd ..
 }
 
-fetch ff-browser
-fetch ff-core
-fetch ff-gl
-fetch ff-graph
-fetch ff-react
-fetch ff-scene
-fetch ff-three
-fetch ff-ui
+for dir in */
+do
+  fetch ${dir%*/}
+done

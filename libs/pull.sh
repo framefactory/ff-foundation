@@ -8,11 +8,7 @@ function pull {
     cd ..
 }
 
-pull ff-browser
-pull ff-core
-pull ff-gl
-pull ff-graph
-pull ff-react
-pull ff-scene
-pull ff-three
-pull ff-ui
+for dir in */
+do
+  pull ${dir%*/}
+done

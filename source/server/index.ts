@@ -3,6 +3,7 @@
  *
  * @author Ralph Wiedemeier <ralph@framefactory.io>
  * @copyright (c) 2020 Frame Factory GmbH
+ * @license MIT
  */
 
 import * as sourceMapSupport from "source-map-support";

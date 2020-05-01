@@ -8,11 +8,7 @@ function status {
     cd ..
 }
 
-status ff-browser
-status ff-core
-status ff-gl
-status ff-graph
-status ff-react
-status ff-scene
-status ff-three
-status ff-ui
+for dir in */
+do
+  status ${dir%*/}
+done
