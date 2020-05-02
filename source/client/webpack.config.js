@@ -162,6 +162,11 @@ WEBPACK - PROJECT BUILD CONFIGURATION
         return Object.keys(components).map(key => createBuildConfiguration(environment, dirs, components[key]));
     }
 
+    const component = components[componentKey];
+    if (component === undefined) {
+        throw new Error(`component not existing: '${componentKey}'`);
+    }
+
     return createBuildConfiguration(environment, dirs, components[componentKey]);
 }
 
