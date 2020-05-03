@@ -164,7 +164,7 @@ WEBPACK - PROJECT BUILD CONFIGURATION
 
     const component = components[componentKey];
     if (component === undefined) {
-        throw new Error(`component not existing: '${componentKey}'`);
+        throw new Error(`[webpack.config.js] can't build, component not existing: '${componentKey}'`);
     }
 
     return createBuildConfiguration(environment, dirs, components[componentKey]);
