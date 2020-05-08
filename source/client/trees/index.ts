@@ -14,7 +14,7 @@ import { schemas } from "@ff/graph/propertyTypes";
 import Property from "@ff/graph/Property";
 import PropertyField from "@ff/scene/ui/PropertyField";
 
-import "./styles.scss";
+import "../styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -11,7 +11,7 @@ import "@ff/ui/Button";
 import "@ff/ui/Transition";
 import "@ff/ui/SlideTransition";
 
-import "./styles.scss";
+import "../styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 

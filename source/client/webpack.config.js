@@ -61,39 +61,32 @@ const assets = [
 ////////////////////////////////////////////////////////////////////////////////
 
 const components = {
+    // Lib ff-react component development
     "default": {
         name: "components",
         title: "FF Components",
         version: projectVersion,
         subdir: "public/built",
-        entry: "client/Components.ts",
+        entry: "client/components/index.tsx",
         template: "client/index.hbs",
-        element: "ff-application",
     },
-    "controls": {
-        name: "controls",
-        title: "FF Controls",
+    // Lib ff-ui web component development
+    "elements": {
+        name: "elements",
+        title: "FF Elements",
         version: projectVersion,
         subdir: "public/built",
-        entry: "client/Controls.ts",
+        entry: "client/elements/index.ts",
         template: "client/index.hbs",
         element: "ff-application",
     },
-    "editor": {
-        name: "editor",
-        title: "FF Editor",
-        version: projectVersion,
-        subdir: "public/built",
-        entry: "client/Editor.ts",
-        template: "client/index.hbs",
-        element: "ff-application",
-    },
+    // Lib ff-ui docking panels
     "panels": {
         name: "panels",
         title: "FF Panels",
         version: projectVersion,
         subdir: "public/built",
-        entry: "client/Panels.ts",
+        entry: "client/panels/index.ts",
         template: "client/index.hbs",
         element: "ff-application",
     },
@@ -102,16 +95,7 @@ const components = {
         title: "FF Trees",
         version: projectVersion,
         subdir: "public/built",
-        entry: "client/Trees.ts",
-        template: "client/index.hbs",
-        element: "ff-application",
-    },
-    "benchmarks": {
-        name: "benchmarks",
-        title: "FF Benchmarks",
-        version: projectVersion,
-        subdir: "public/built",
-        entry: "client/Benchmarks.ts",
+        entry: "client/trees/index.ts",
         template: "client/index.hbs",
         element: "ff-application",
     },
@@ -120,19 +104,10 @@ const components = {
         title: "FF Transition",
         version: projectVersion,
         subdir: "public/built",
-        entry: "client/Transition.ts",
+        entry: "client/transitions/index.ts",
         template: "client/index.hbs",
         element: "ff-application",
     },
-    "viewer": {
-        name: "viewer",
-        title: "FF Viewer",
-        version: projectVersion,
-        subdir: "public/built",
-        entry: "client/Viewer.ts",
-        template: "client/index.hbs",
-        element: "ff-application",
-    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////

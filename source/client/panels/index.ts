@@ -8,7 +8,7 @@
 import CustomElement, { customElement, html } from "@ff/ui/CustomElement";
 import DockView, { DockContentRegistry } from "@ff/ui/DockView";
 
-import "./styles.scss";
+import "../styles.scss";
 
 ////////////////////////////////////////////////////////////////////////////////
 

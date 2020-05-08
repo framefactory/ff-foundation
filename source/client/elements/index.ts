@@ -20,7 +20,7 @@ import "@ff/ui/ColorEdit";
 import "@ff/ui/ColorWheel";
 import "@ff/ui/ColorButton";
 
-import "./styles.scss";
+import "../styles.scss";
 
 import Icon from "@ff/ui/Icon";
 import { IButtonClickEvent } from "@ff/ui/Button";
