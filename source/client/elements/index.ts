@@ -19,6 +19,8 @@ import "@ff/ui/LineEdit";
 import "@ff/ui/ColorEdit";
 import "@ff/ui/ColorWheel";
 import "@ff/ui/ColorButton";
+import "@ff/ui/Gauge";
+import "@ff/ui/Knob";
 
 import "../styles.scss";
 
@@ -44,16 +46,15 @@ export class Application extends CustomElement
 {
     protected firstUpdated()
     {
-        setTimeout(() => new Notification("OK this is a very long notification text, it will probably require multiple lines. OK this is a very long notification text, it will probably require multiple lines.", "info"), 500);
-        setTimeout(() => new Notification("Hello World 2", "warning"), 1000);
-        setTimeout(() => new Notification("Download completed.", "success"), 1250);
-        setTimeout(() => error("Hello World 3"), 1500);
+        // test notifications
+        // setTimeout(() => new Notification("OK this is a very long notification text, it will probably require multiple lines. OK this is a very long notification text, it will probably require multiple lines.", "info"), 500);
+        // setTimeout(() => new Notification("Hello World 2", "warning"), 1000);
+        // setTimeout(() => new Notification("Download completed.", "success"), 1250);
+        // setTimeout(() => error("Hello World 3"), 1500);
     }
 
     protected render()
     {
-        console.log("Application.render");
-
         const items: IMenuItem[] = [
             {
                 text: "First Option",
@@ -74,21 +75,28 @@ export class Application extends CustomElement
         const color = new Color().setHSV(180, 0.5, 0.5).setAlpha(0);
 
         return html`
-            <div>
-                <div class="ff-flex-row ff-frame">
-                    <ff-button text="Button 1" checked title="Button 1 Title" caret></ff-button>
-                    <ff-dropdown text="Dropdown 2" icon="close" .items=${items} itemIndex="0" @select=${this.onMenuSelect}></ff-dropdown>
-                    <ff-button text="Long Button 3" icon="save"></ff-button>
-                    <ff-button text="Long Button 4" icon="atom"></ff-button>
-                    <ff-button text="Long Button 5" icon="bath" caret up></ff-button>
-                    <ff-button icon="bullhorn" selectable></ff-button>
-                </div>
-    
-                <div class="ff-flex-row ff-frame">
-                    <ff-color-edit .color=${color} style="height: 200px; width: 230px;" alpha numeric @change=${this.onColorChange}>
-                    </ff-color-edit>
-                    
-                    <ff-color-button selectable style="height: 30px; width: 30px;"></ff-color-button>
+            <div class="ff-frame">
+                <div class="ff-flex-row">
+                    <div class="ff-flex-column">
+                        <div class="ff-flex-row">
+                            <ff-button text="Button 1" checked title="Button 1 Title" caret></ff-button>
+                            <ff-dropdown text="Dropdown 2" icon="close" .items=${items} itemIndex="0" @select=${this.onMenuSelect}></ff-dropdown>
+                            <ff-button text="Long Button 3" icon="save"></ff-button>
+                            <ff-button text="Long Button 4" icon="atom"></ff-button>
+                            <ff-button text="Long Button 5" icon="bath" caret up></ff-button>
+                            <ff-button icon="bullhorn" selectable></ff-button>
+                        </div>
+            
+                        <div class="ff-flex-row">
+                            <ff-color-edit .color=${color} style="height: 200px; width: 230px;" alpha numeric @change=${this.onColorChange}>
+                            </ff-color-edit>
+                            
+                            <ff-color-button selectable style="height: 30px; width: 30px;"></ff-color-button>
+                        </div>
+                    </div>
+                    <div class="ff-flex-column">
+                        <ff-gauge value="0.85"></ff-gauge>
+                    </div>
                 </div>
             </div>
             
