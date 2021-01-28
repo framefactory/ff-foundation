@@ -22,3 +22,6 @@
 [submodule "libs/ff-gl"]
 	path = libs/ff-gl
 	url = git@github.com:framefactory/ff-gl.git
+[submodule "libs/ff-two"]
+	path = libs/ff-two
+	url = git@github.com:framefactory/ff-two.git

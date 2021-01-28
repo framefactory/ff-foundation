@@ -1,6 +1,6 @@
 # FF UI Typescript Foundation Library
 
-Copyright 2020 [Frame Factory GmbH](https://framefactory.ch), [Ralph Wiedemeier](https://about.me/ralphw)
+Copyright 2021 [Frame Factory GmbH](https://framefactory.ch), [Ralph Wiedemeier](https://about.me/ralphw)
 
 ## Modules
 - FF Core
@@ -8,5 +8,6 @@ Copyright 2020 [Frame Factory GmbH](https://framefactory.ch), [Ralph Wiedemeier]
 - FF UI
 - FF React
 - FF Graph
+- FF Two
 - FF Three
 - FF Scene

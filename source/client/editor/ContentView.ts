@@ -1,6 +1,6 @@
 /**
  * FF Typescript Foundation Library
- * Copyright 2018 Ralph Wiedemeier, Frame Factory GmbH
+ * Copyright 2021 Ralph Wiedemeier, Frame Factory GmbH
  *
  * License: MIT
  */
@@ -90,7 +90,7 @@ export default class ContentView extends CustomElement
         //this.view.addViewport().setSize(0, 0, 0.5, 1);
         //this.view.addViewport().setSize(0.5, 0, 0.5, 1);
 
-        this.manipTarget.next = this.view;
+        this.manipTarget.listener = this.view;
     }
 
     protected connected()

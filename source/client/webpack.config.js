@@ -1,3 +1,8 @@
+/**
+ * Webpack configuration
+ * Typescript / SCSS
+ */
+
 "use strict";
 
 require("dotenv").config();
@@ -49,6 +54,7 @@ const alias = {
     "@ff/graph": "ff-graph/source",
     "@ff/react": "ff-react/source",
     "@ff/scene": "ff-scene/source",
+    "@ff/two": "ff-two/source",
     "@ff/three": "ff-three/source",
     "@ff/ui": "ff-ui/source",
 };
@@ -61,17 +67,8 @@ const assets = [
 ////////////////////////////////////////////////////////////////////////////////
 
 const components = {
-    // Lib ff-react component development
-    "default": {
-        name: "components",
-        title: "FF Components",
-        version: projectVersion,
-        subdir: "public/built",
-        entry: "client/components/index.tsx",
-        template: "client/index.hbs",
-    },
     // Lib ff-ui web component development
-    "elements": {
+    "default": {
         name: "elements",
         title: "FF Elements",
         version: projectVersion,
@@ -193,7 +190,7 @@ WEBPACK - COMPONENT BUILD CONFIGURATION
             // library aliases
             alias,
             // Resolvable extensions
-            extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+            extensions: [".ts", ".tsx", ".js", ".jsx", ".mjs", ".json"],
         },
 
 
@@ -214,7 +211,6 @@ WEBPACK - COMPONENT BUILD CONFIGURATION
             }),
             new MiniCssExtractPlugin({
                 filename: cssOutputFileName,
-                allChunks: true,
             }),
             new HTMLWebpackPlugin({
                 filename: htmlOutputFileName,
@@ -252,7 +248,7 @@ WEBPACK - COMPONENT BUILD CONFIGURATION
                     // SCSS
                     test: /\.s[ac]ss$/i,
                     use: [
-                        MiniCssExtractPlugin.loader,
+                        isDevMode ? "style-loader" : MiniCssExtractPlugin.loader,
                         'css-loader',
                         'sass-loader',
                     ],
@@ -261,7 +257,7 @@ WEBPACK - COMPONENT BUILD CONFIGURATION
                     // CSS
                     test: /\.css$/,
                     use: [
-                        MiniCssExtractPlugin.loader,
+                        isDevMode ? "style-loader" : MiniCssExtractPlugin.loader,
                         "css-loader",
                     ]
                 },
