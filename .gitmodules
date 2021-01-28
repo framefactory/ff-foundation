@@ -25,3 +25,6 @@
 [submodule "libs/ff-two"]
 	path = libs/ff-two
 	url = git@github.com:framefactory/ff-two.git
+[submodule "libs/ff-media"]
+	path = libs/ff-media
+	url = git@github.com:framefactory/ff-media.git
