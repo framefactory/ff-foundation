@@ -10,6 +10,7 @@
         { "path": "ff-core" },
         { "path": "ff-gl" },
         { "path": "ff-graph" },
+        { "path": "ff-media" },
         { "path": "ff-react" },
         { "path": "ff-scene" },
         { "path": "ff-three" },

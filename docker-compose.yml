@@ -5,6 +5,7 @@ services:
     image: framefactory/node
     container_name: foundation-server
     restart: always
+
     command: [ "npm", "run", "$NPM_SCRIPT" ]
 
     environment:

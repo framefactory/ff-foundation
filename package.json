@@ -5,10 +5,9 @@
     "scripts": {
         "start": "npm run server",
         "server": "tsc -b source/server; nodemon services/server/bin/index.js",
-        "watch": "tsc -b source/server; concurrently \"cd source/client && webpack --color -w --mode=development --component=all\" \"tsc -b -w source/server\" \"nodemon services/server/bin/index.js\"",
-        "watch:server": "tsc -b source/server; concurrently \"tsc -b -w source/server\" \"nodemon services/server/bin/index.js\"",
-        "watch:client": "cd source/client; webpack --color -w --mode=development --component=all",
-        "watch:component": "tsc -b source/server; concurrently \"cd source/client && webpack --color -w --mode=development --component=$WATCH_COMPONENT\" \"tsc -b -w source/server\" \"nodemon services/server/bin/index.js\"",
+        "dev": "tsc -b source/server; concurrently \"cd source/client && webpack --color -w --mode=development --component=all\" \"tsc -b -w source/server\" \"nodemon services/server/bin/index.js\"",
+        "dev:component": "tsc -b source/server; concurrently \"cd source/client && webpack --color -w --mode=development --component=$WATCH_COMPONENT\" \"tsc -b -w source/server\" \"nodemon services/server/bin/index.js\"",
+        "build": "concurrently \"npm run build:client\" \"npm run build:server\"",
         "build:server": "tsc -b source/server",
         "build:client": "cd source/client; webpack --color --component=all; cd ../..",
         "build:client:prod": "cd source/client; webpack --color --mode=production --component=all; cd ../..",
@@ -20,9 +19,10 @@
         "test:core": "tsc -b libs/ff-core/tsconfig.test.json && mocha -c --ui tdd libs/ff-core/built/test/test.js || exit 0",
         "test:graph": "tsc -b libs/ff-graph/tsconfig.test.json && mocha -c --ui tdd libs/ff-graph/built/test/test.js || exit 0",
         "doc": "typedoc --name \"FF Foundation Library\" --exclude \"**/node_modules/**\" --ignoreCompilerErrors --mode file --target ES6 --theme minimal --out doc/code/ source/",
-        "up": "docker-compose up -d; docker-compose logs -f",
+        "up": "bash -c 'WATCH_COMPONENT=${0/#bash/all} NPM_SCRIPT=dev:component docker-compose up -d; docker-compose logs -f'",
         "down": "docker-compose stop; docker-compose rm -f -v",
-        "restart": "docker-compose stop; docker-compose rm -f -v; docker-compose up -d; docker-compose logs -f",
+        "restart": "npm run down; npm run up",
+        "install": "docker-compose exec server npm install",
         "bash": "docker-compose exec server bash"
     },
     "nodemonConfig": {
@@ -36,6 +36,7 @@
         "@ff/core": "libs/ff-core/built/export",
         "@ff/gl": "libs/ff-gl/built/export",
         "@ff/graph": "libs/ff-graph/built/export",
+        "@ff/media": "libs/ff-media/built/export",
         "@ff/react": "libs/ff-react/built/export",
         "@ff/scene": "libs/ff-scene/built/export",
         "@ff/three": "libs/ff-three/built/export",
@@ -43,7 +44,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/framelab/ff-foundation.git"
+        "url": "git+https://github.com/framefactory/ff-foundation.git"
     },
     "keywords": [
         "typescript",
@@ -59,9 +60,9 @@
     "license": "MIT",
     "private": true,
     "bugs": {
-        "url": "https://github.com/framelab/ff-foundation/issues"
+        "url": "https://github.com/framefactory/ff-foundation/issues"
     },
-    "homepage": "https://github.com/framelab/ff-foundation#readme",
+    "homepage": "https://github.com/framefactory/ff-foundation#readme",
     "dependencies": {
         "lit-element": "^2.4.0",
         "lit-html": "^1.3.0",
