@@ -69,6 +69,15 @@ const assets = [
 const components = {
     // Lib ff-ui web component development
     "default": {
+        name: "editor",
+        title: "FF Editor",
+        version: projectVersion,
+        subdir: "public/built",
+        entry: "client/editor/index.ts",
+        template: "client/index.hbs",
+        element: "ff-application",
+    },
+    "elements": {
         name: "elements",
         title: "FF Elements",
         version: projectVersion,
