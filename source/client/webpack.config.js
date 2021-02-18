@@ -48,15 +48,15 @@ const modules = [
 // import aliases
 const alias = {
     "client": path.resolve(dirs.source, "client"),
-    "@ff/core": "@framefactory/core/source",
-    "@ff/browser": "ff-browser/source",
-    "@ff/gl": "ff-gl/source",
-    "@ff/graph": "ff-graph/source",
-    "@ff/react": "ff-react/source",
-    "@ff/scene": "ff-scene/source",
-    "@ff/two": "ff-two/source",
-    "@ff/three": "ff-three/source",
-    "@ff/ui": "ff-ui/source",
+    "@ff/browser": "@framefactory/browser/src",
+    "@ff/core": "@framefactory/core/src",
+    "@ff/gl": "@framefactory/gl/src",
+    "@ff/graph": "@framefactory/graph/src",
+    "@ff/react": "@framefactory/react/src",
+    "@ff/scene": "@framefactory/scene/src",
+    "@ff/three": "@framefactory/three/src",
+    "@ff/two": "@framefactory/two/src",
+    "@ff/ui": "@framefactory/ui/src",
 };
 
 // static assets to be copied to build output

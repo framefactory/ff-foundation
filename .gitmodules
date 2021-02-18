@@ -1,30 +1,27 @@
-[submodule "libs/ff-core"]
-	path = libs/ff-core
-	url = git@github.com:framefactory/ff-core.git
-[submodule "libs/ff-ui"]
-	path = libs/ff-ui
-	url = git@github.com:framefactory/ff-ui.git
-[submodule "libs/ff-react"]
-	path = libs/ff-react
-	url = git@github.com:framefactory/ff-react.git
-[submodule "libs/ff-three"]
-	path = libs/ff-three
-	url = git@github.com:framefactory/ff-three.git
-[submodule "libs/ff-browser"]
-	path = libs/ff-browser
-	url = git@github.com:framefactory/ff-browser.git
-[submodule "libs/ff-graph"]
-	path = libs/ff-graph
-	url = git@github.com:framefactory/ff-graph.git
-[submodule "libs/ff-scene"]
-	path = libs/ff-scene
-	url = git@github.com:framefactory/ff-scene.git
-[submodule "libs/ff-gl"]
-	path = libs/ff-gl
-	url = git@github.com:framefactory/ff-gl.git
-[submodule "libs/ff-two"]
-	path = libs/ff-two
-	url = git@github.com:framefactory/ff-two.git
-[submodule "libs/ff-media"]
-	path = libs/ff-media
-	url = git@github.com:framefactory/ff-media.git
+[submodule "libs/core"]
+	path = libs/core
+	url = git@github.com:framefactory/ff-core
+[submodule "libs/browser"]
+	path = libs/browser
+	url = git@github.com:framefactory/ff-browser
+[submodule "libs/graph"]
+	path = libs/graph
+	url = git@github.com:framefactory/ff-graph
+[submodule "libs/ui"]
+	path = libs/ui
+	url = git@github.com:framefactory/ff-ui
+[submodule "libs/scene"]
+	path = libs/scene
+	url = git@github.com:framefactory/ff-scene
+[submodule "libs/two"]
+	path = libs/two
+	url = git@github.com:framefactory/ff-two
+[submodule "libs/three"]
+	path = libs/three
+	url = git@github.com:framefactory/ff-three
+[submodule "libs/react"]
+	path = libs/react
+	url = git@github.com:framefactory/ff-react
+[submodule "libs/gl"]
+	path = libs/gl
+	url = git@github.com:framefactory/ff-gl
