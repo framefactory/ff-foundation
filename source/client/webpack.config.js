@@ -48,8 +48,8 @@ const modules = [
 // import aliases
 const alias = {
     "client": path.resolve(dirs.source, "client"),
+    "@ff/core": "@framefactory/core/source",
     "@ff/browser": "ff-browser/source",
-    "@ff/core": "ff-core/source",
     "@ff/gl": "ff-gl/source",
     "@ff/graph": "ff-graph/source",
     "@ff/react": "ff-react/source",

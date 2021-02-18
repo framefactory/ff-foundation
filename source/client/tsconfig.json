@@ -11,8 +11,8 @@
         "baseUrl": ".",
         "paths": {
             "client/*": [ "./*" ],
+            "@ff/core/*": [ "@framefactory/core/source/*" ],
             "@ff/browser/*": [ "../../libs/ff-browser/source/*" ],
-            "@ff/core/*": [ "../../libs/ff-core/source/*" ],
             "@ff/gl/*": [ "../../libs/ff-gl/source/*" ],
             "@ff/graph/*": [ "../../libs/ff-graph/source/*"],
             "@ff/media/*": [ "../../libs/ff-media/source/*"],

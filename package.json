@@ -32,15 +32,7 @@
         ]
     },
     "_moduleAliases": {
-        "@ff/browser": "libs/ff-browser/built/export",
-        "@ff/core": "libs/ff-core/built/export",
-        "@ff/gl": "libs/ff-gl/built/export",
-        "@ff/graph": "libs/ff-graph/built/export",
-        "@ff/media": "libs/ff-media/built/export",
-        "@ff/react": "libs/ff-react/built/export",
-        "@ff/scene": "libs/ff-scene/built/export",
-        "@ff/three": "libs/ff-three/built/export",
-        "@ff/ui": "libs/ff-ui/built/export"
+        "@ff/core": "@framefactory/core"
     },
     "repository": {
         "type": "git",
@@ -64,6 +56,9 @@
     },
     "homepage": "https://github.com/framefactory/ff-foundation#readme",
     "dependencies": {
+        "@framefactory/browser": "file:libs/ff-browser",
+        "@framefactory/core": "file:libs/ff-core",
+        "@framefactory/graph": "file:libs/ff-graph",
         "lit-element": "^2.4.0",
         "lit-html": "^1.3.0",
         "react": "^17.0.1",
@@ -100,10 +95,10 @@
         "nodemon": "^2.0.7",
         "optimize-css-assets-webpack-plugin": "^5.0.4",
         "prettier": "^2.2.1",
-        "style-loader": "^2.0.0",
         "raw-loader": "^4.0.2",
         "sass-loader": "^10.1.1",
         "source-map-loader": "^2.0.0",
+        "style-loader": "^2.0.0",
         "terser-webpack-plugin": "^5.1.1",
         "ts-loader": "^8.0.14",
         "typescript": "^4.1.3",
