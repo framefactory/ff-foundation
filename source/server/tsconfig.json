@@ -10,11 +10,11 @@
         "rootDir": ".",
         "baseUrl": ".",
         "paths": {
-            "@ff/core/*": [ "../../libs/ff-core/source/*" ]
+            "@ff/core/*": [ "../../libs/core/src/*" ]
         }
     },
     "references": [
-        { "path": "../../libs/ff-core/tsconfig.json" }
+        { "path": "../../libs/core" }
     ],
     "files": [
         "index.ts"

@@ -48,15 +48,16 @@ const modules = [
 // import aliases
 const alias = {
     "client": path.resolve(dirs.source, "client"),
-    "@ff/browser": "@framefactory/browser/src",
-    "@ff/core": "@framefactory/core/src",
-    "@ff/gl": "@framefactory/gl/src",
-    "@ff/graph": "@framefactory/graph/src",
-    "@ff/react": "@framefactory/react/src",
-    "@ff/scene": "@framefactory/scene/src",
-    "@ff/three": "@framefactory/three/src",
-    "@ff/two": "@framefactory/two/src",
-    "@ff/ui": "@framefactory/ui/src",
+    "three": path.resolve(dirs.modules, "three"),
+    "@ff/browser": path.resolve(dirs.libs, "browser/src"),
+    "@ff/core": path.resolve(dirs.libs, "core/src"),
+    "@ff/gl": path.resolve(dirs.libs, "gl/src"),
+    "@ff/graph": path.resolve(dirs.libs, "graph/src"),
+    "@ff/react": path.resolve(dirs.libs, "react/src"),
+    "@ff/scene": path.resolve(dirs.libs, "scene/src"),
+    "@ff/three": path.resolve(dirs.libs, "three/src"),
+    "@ff/two": path.resolve(dirs.libs, "two/src"),
+    "@ff/ui": path.resolve(dirs.libs, "ui/src"),
 };
 
 // static assets to be copied to build output

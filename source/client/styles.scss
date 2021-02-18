@@ -5,9 +5,9 @@
  * License: MIT
  */
 
-@import "../../libs/ff-ui/source/styles/midnight";
-@import "../../libs/ff-three/source/ui/styles";
-@import "../../libs/ff-scene/source/ui/styles";
+@import "../../libs/ui/src/styles/midnight";
+@import "../../libs/three/src/ui/styles";
+@import "../../libs/scene/src/ui/styles";
 
 ff-application {
   @include fullsize;
