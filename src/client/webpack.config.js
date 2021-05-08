@@ -1,6 +1,7 @@
 /**
  * Webpack configuration
- * Typescript / SCSS
+ * Typescript / Web Components / SCSS
+ * Version 3.3
  */
 
 "use strict";
@@ -14,8 +15,10 @@ const webpack = require("webpack");
 
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let projectVersion = "v0.0.0";
 try {
@@ -24,12 +27,26 @@ try {
 catch {}
 
 ////////////////////////////////////////////////////////////////////////////////
-// PROJECT / COMPONENTS
+// CONFIGURATION
+
+const defaultTarget = "web";
+const useDevServer = false;
+const projectDir = path.resolve(__dirname, "../..");
+
+const dirs = {
+    source: path.resolve(projectDir, "src"),
+    assets
+    output: path.resolve(projectDir, "services/server"),
+    static: path.resolve(projectDir, "services/server/public/static"),
+    modules: path.resolve(projectDir, "node_modules"),
+    jsFolder: "", // "js/";
+    cssFolder: "", // "css/";
+};
 
 const projectDir = path.resolve(__dirname, "../..");
 
 const dirs = {
-    source: path.resolve(projectDir, "source"),
+    source: path.resolve(projectDir, "src"),
     assets: path.resolve(projectDir, "assets"),
     output: path.resolve(projectDir, "services/server"),
     modules: path.resolve(projectDir, "node_modules"),
