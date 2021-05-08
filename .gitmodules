@@ -25,9 +25,3 @@
 [submodule "libs/gl"]
 	path = libs/gl
 	url = git@github.com:framefactory/ff-gl
-[submodule "libs/cgui"]
-	path = libs/cgui
-	url = git@github.com:framefactory/ff-cgui
-[submodule "libs/geo"]
-	path = libs/geo
-	url = git@github.com:framefactory/ff-geo
